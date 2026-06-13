@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overscroll-behavior: none;
+    /* No background-color here — keeps body's bg-gray-950 propagated to the
+       canvas so the fixed background div at z-[-1] remains visible */
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-white;
+  }
+  body {
+    @apply text-gray-200 antialiased;
+    background-color: transparent; /* must stay transparent so canvas stays dark via propagation */
+    overscroll-behavior: none;
+  }
+}
+
+
+
+@layer utilities {
+  .dot-grid {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

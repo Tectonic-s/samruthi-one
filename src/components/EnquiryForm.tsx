@@ -1,0 +1,249 @@
+'use client'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+
+const businessTypes = ['Proprietorship', 'Partnership', 'Private Limited', 'LLP', 'Salaried', 'Self-Employed']
+const facilities = [
+  'Loan Against Property',
+  'Home Loan',
+  'Personal Loan',
+  'Balance Transfer',
+  'Business Loans',
+  'Auto Loans',
+  'Machinery Loans',
+  'Commercial Vehicle Loan',
+  'Bank Overdraft',
+  'Dropline Overdraft',
+  'Letter of Credit',
+  'Not Sure — Need Advisory'
+]
+const ranges = ['<₹25L', '₹25L–1Cr', '₹1–5Cr', '₹5–25Cr', '>₹25Cr']
+
+export default function EnquiryForm({ defaultFacility = '' }: { defaultFacility?: string }) {
+  const router = useRouter()
+  const [form, setForm] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    businessType: '',
+    facility: defaultFacility,
+    loanAmount: '',
+    turnover: '',
+    message: '',
+    consent: false
+  })
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [loading, setLoading] = useState(false)
+
+  const set = (k: string, v: string | boolean) => setForm((p) => ({ ...p, [k]: v }))
+
+  const validate = () => {
+    const e: Record<string, string> = {}
+    if (!form.name.trim()) e.name = 'Required'
+    if (!/^[6-9]\d{9}$/.test(form.phone.replace(/\s/g, ''))) e.phone = 'Enter valid 10-digit number'
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Enter valid email'
+    if (!form.businessType) e.businessType = 'Required'
+    if (!form.facility) e.facility = 'Required'
+    if (!form.consent) e.consent = 'Please agree to proceed'
+    return e
+  }
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const errs = validate()
+    if (Object.keys(errs).length) {
+      setErrors(errs)
+      return
+    }
+    setErrors({})
+    setLoading(true)
+    try {
+      const res = await fetch('/api/enquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form)
+      })
+      const data = await res.json()
+      if (data.success) {
+        router.push(`/thank-you?ref=${data.referenceId}`)
+      } else {
+        setErrors({ submit: data.error ?? 'Something went wrong' })
+      }
+    } catch {
+      setErrors({ submit: 'Network error. Please try again.' })
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const inputClass = "w-full bg-gray-900/60 border border-white/10 text-white rounded-xl focus:border-[#FFC800] focus:ring-1 focus:ring-[#FFC800] focus:bg-gray-950 px-4 py-3 text-sm transition-all outline-none placeholder-gray-500 appearance-none"
+  const labelClass = "block text-[0.68rem] font-semibold tracking-widest uppercase text-gray-400 mb-2"
+  const errClass = "text-red-400 text-xs mt-1.5 font-medium"
+
+  return (
+    <form onSubmit={submit} noValidate className="space-y-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="name" className={labelClass}>Full Name *</label>
+          <input
+            id="name"
+            className={inputClass}
+            value={form.name}
+            onChange={(e) => set('name', e.target.value)}
+            placeholder="Your full name"
+          />
+          {errors.name && <p className={errClass}>{errors.name}</p>}
+        </div>
+        <div>
+          <label htmlFor="phone" className={labelClass}>Mobile Number *</label>
+          <input
+            id="phone"
+            className={inputClass}
+            value={form.phone}
+            onChange={(e) => set('phone', e.target.value)}
+            placeholder="10-digit number"
+          />
+          {errors.phone && <p className={errClass}>{errors.phone}</p>}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="email" className={labelClass}>Email Address *</label>
+          <input
+            id="email"
+            type="email"
+            className={inputClass}
+            value={form.email}
+            onChange={(e) => set('email', e.target.value)}
+            placeholder="your@email.com"
+          />
+          {errors.email && <p className={errClass}>{errors.email}</p>}
+        </div>
+        <div>
+          <label htmlFor="businessType" className={labelClass}>Business Type *</label>
+          <div className="relative">
+            <select
+              id="businessType"
+              className={`${inputClass} cursor-pointer`}
+              value={form.businessType}
+              onChange={(e) => set('businessType', e.target.value)}
+            >
+              <option value="" className="bg-gray-950">Select</option>
+              {businessTypes.map((t) => (
+                <option key={t} value={t} className="bg-gray-950">{t}</option>
+              ))}
+            </select>
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+              ▼
+            </div>
+          </div>
+          {errors.businessType && <p className={errClass}>{errors.businessType}</p>}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="facility" className={labelClass}>Facility Required *</label>
+          <div className="relative">
+            <select
+              id="facility"
+              className={`${inputClass} cursor-pointer`}
+              value={form.facility}
+              onChange={(e) => set('facility', e.target.value)}
+            >
+              <option value="" className="bg-gray-950">Select</option>
+              {facilities.map((f) => (
+                <option key={f} value={f} className="bg-gray-950">{f}</option>
+              ))}
+            </select>
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+              ▼
+            </div>
+          </div>
+          {errors.facility && <p className={errClass}>{errors.facility}</p>}
+        </div>
+        <div>
+          <label htmlFor="loanAmount" className={labelClass}>Loan Amount</label>
+          <div className="relative">
+            <select
+              id="loanAmount"
+              className={`${inputClass} cursor-pointer`}
+              value={form.loanAmount}
+              onChange={(e) => set('loanAmount', e.target.value)}
+            >
+              <option value="" className="bg-gray-950">Select range</option>
+              {ranges.map((r) => (
+                <option key={r} value={r} className="bg-gray-950">{r}</option>
+              ))}
+            </select>
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+              ▼
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="turnover" className={labelClass}>Annual Turnover</label>
+        <div className="relative">
+          <select
+            id="turnover"
+            className={`${inputClass} cursor-pointer`}
+            value={form.turnover}
+            onChange={(e) => set('turnover', e.target.value)}
+          >
+            <option value="" className="bg-gray-950">Select range</option>
+            {ranges.map((r) => (
+              <option key={r} value={r} className="bg-gray-950">{r}</option>
+            ))}
+          </select>
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+            ▼
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="message" className={labelClass}>Brief Description</label>
+        <textarea
+          id="message"
+          className={`${inputClass} min-h-[100px] resize-y`}
+          value={form.message}
+          onChange={(e) => set('message', e.target.value)}
+          placeholder="Tell us about your business and requirement..."
+        />
+      </div>
+
+      <div>
+        <label className="flex items-start gap-3 cursor-pointer group">
+          <input
+            type="checkbox"
+            checked={form.consent}
+            onChange={(e) => set('consent', e.target.checked)}
+            className="mt-1.5 accent-[#FFC800] h-4 w-4 rounded border-white/10 bg-gray-900 text-[#FFC800] focus:ring-0 focus:ring-offset-0"
+          />
+          <span className="text-xs text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
+            I agree to the <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[#FFC800] font-semibold hover:underline">Privacy Policy</a> and{' '}
+            <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-[#FFC800] font-semibold hover:underline">Terms</a> and consent to being contacted by Samruthi One.
+          </span>
+        </label>
+        {errors.consent && <p className={errClass}>{errors.consent}</p>}
+      </div>
+
+      {errors.submit && (
+        <div className="bg-red-950/40 border border-red-500/20 text-red-400 p-4 rounded-xl text-sm font-medium">
+          {errors.submit}
+        </div>
+      )}
+
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full bg-[#FFC800] text-gray-900 font-bold py-4 rounded-xl hover:bg-[#E6B400] transition-colors tracking-widest text-xs uppercase shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {loading ? 'Submitting...' : 'Submit Enquiry'}
+      </button>
+    </form>
+  )
+}

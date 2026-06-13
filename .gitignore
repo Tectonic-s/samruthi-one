@@ -1,0 +1,42 @@
+# ── Environment Variables (NEVER commit these) ────────────────────────────────
+.env
+.env.local
+.env.development
+.env.production
+.env*.local
+# Safe to commit:
+# .env.example  ← this one IS tracked
+
+# ── Next.js ───────────────────────────────────────────────────────────────────
+.next/
+out/
+
+# ── Node ──────────────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Vercel ────────────────────────────────────────────────────────────────────
+.vercel
+
+# ── Prisma ────────────────────────────────────────────────────────────────────
+# schema.prisma is tracked. Generated client is not needed.
+
+# ── Build ─────────────────────────────────────────────────────────────────────
+/build
+/dist
+
+# ── OS / Editor ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+
+learning.md
