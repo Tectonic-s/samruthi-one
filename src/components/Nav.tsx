@@ -65,7 +65,7 @@ export default function Nav() {
           <div className="hidden md:block">
             <Link
               href="/enquiry"
-              className="bg-black text-[#F7C83C] font-semibold px-6 py-2.5 rounded-full text-xs uppercase tracking-wider hover:bg-black/80 transition-colors"
+              className="bg-black text-[#F7C83C] font-semibold px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider hover:bg-black/80 transition-colors"
             >
               Enquire Now
             </Link>
@@ -109,7 +109,7 @@ export default function Nav() {
             <Link
               href="/enquiry"
               onClick={() => setMenuOpen(false)}
-              className="block mt-4 mx-2 bg-black text-center rounded-full text-[#F7C83C] font-semibold px-6 py-3 text-sm hover:bg-black/80 transition-colors"
+              className="block mt-4 mx-2 bg-black text-center rounded-xl text-[#F7C83C] font-semibold px-6 py-3 text-sm hover:bg-black/80 transition-colors"
             >
               Enquire Now
             </Link>

@@ -1,6 +1,6 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { SITE_CONFIG } from '@/lib/data/content'
-import Logo from '@/components/Logo'
 
 export default function Footer() {
   return (
@@ -9,7 +9,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-12">
           {/* Company Intro */}
           <div className="md:col-span-4 flex flex-col space-y-4">
-            <Logo />
+            <Link href="/" className="select-none">
+              <Image src="/logos/Logo2.png" alt="Samruthi One" width={160} height={160} style={{ objectFit: 'contain', height: '45px', width: 'auto' }} />
+            </Link>
             
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">
               RBI-registered Fintech providing working capital, trade finance, and property loans with multi-bank access for businesses across India.
