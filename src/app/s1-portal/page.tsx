@@ -6,7 +6,7 @@ import type { Lead } from '@/types'
 
 const STATUS_COLORS: Record<string, { bg: string; color: string; border: string }> = {
   'New':         { bg: 'rgba(59,130,246,0.12)',  color: '#60a5fa', border: 'rgba(59,130,246,0.3)'  },
-  'Contacted':   { bg: 'rgba(251,191,36,0.12)',  color: '#FFC800', border: 'rgba(251,191,36,0.3)'  },
+  'Contacted':   { bg: 'rgba(251,191,36,0.12)',  color: '#F7C83C', border: 'rgba(251,191,36,0.3)'  },
   'In Progress': { bg: 'rgba(167,139,250,0.12)', color: '#a78bfa', border: 'rgba(167,139,250,0.3)' },
   'Closed':      { bg: 'rgba(52,211,153,0.12)',  color: '#34d399', border: 'rgba(52,211,153,0.3)'  },
 }
@@ -148,7 +148,7 @@ export default function AdminDashboard() {
   if (authStatus === 'loading' || authStatus === 'unauthenticated') {
     return (
       <div style={{ minHeight: '100vh', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#FFC800', fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase' }}>Loading...</div>
+        <div style={{ color: '#F7C83C', fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase' }}>Loading...</div>
       </div>
     )
   }
@@ -167,9 +167,9 @@ export default function AdminDashboard() {
         {/* Header */}
         <header style={{ background: '#111', borderBottom: '1px solid rgba(255,255,255,0.06)', height: 58, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 28px', position: 'sticky', top: 0, zIndex: 50 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <svg width="26" height="26" viewBox="0 0 34 34" fill="none" aria-hidden="true"><path d="M4 4 H24 Q30 4 30 10 V30 Q20 30 12 22 Q4 14 4 4Z" fill="#fff" /><path d="M2 22 Q2 32 12 32 L12 25 Q7 25 7 20Z" fill="#FFC800" /></svg>
+            <svg width="26" height="26" viewBox="0 0 34 34" fill="none" aria-hidden="true"><path d="M4 4 H24 Q30 4 30 10 V30 Q20 30 12 22 Q4 14 4 4Z" fill="#fff" /><path d="M2 22 Q2 32 12 32 L12 25 Q7 25 7 20Z" fill="#F7C83C" /></svg>
             <span style={{ color: '#fff', fontWeight: 700, fontSize: '0.95rem', letterSpacing: '-0.01em' }}>Samruthi One</span>
-            <span style={{ background: 'rgba(255,200,0,0.12)', color: '#FFC800', fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', padding: '3px 8px', borderRadius: 4, border: '1px solid rgba(255,200,0,0.2)' }}>Portal</span>
+            <span style={{ background: 'rgba(255,200,0,0.12)', color: '#F7C83C', fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', padding: '3px 8px', borderRadius: 4, border: '1px solid rgba(255,200,0,0.2)' }}>Portal</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <span style={{ color: '#555', fontSize: '0.75rem' }}>{session?.user?.email}</span>
@@ -187,7 +187,7 @@ export default function AdminDashboard() {
 
           {/* Page title */}
           <div style={{ marginBottom: '1.5rem' }}>
-            <p style={{ fontSize: '0.65rem', color: '#FFC800', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 4 }}>Dashboard</p>
+            <p style={{ fontSize: '0.65rem', color: '#F7C83C', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 4 }}>Dashboard</p>
             <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em' }}>Enquiry Leads</h1>
           </div>
 
@@ -219,7 +219,7 @@ export default function AdminDashboard() {
                   value={filterStatus}
                   onChange={e => { setFilterStatus(e.target.value); setPage(1) }}
                   aria-label="Filter by status"
-                  style={{ padding: '7px 12px', background: '#0a0a0a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6, fontSize: '0.78rem', outline: 'none', color: filterStatus ? '#FFC800' : '#888' }}
+                  style={{ padding: '7px 12px', background: '#0a0a0a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6, fontSize: '0.78rem', outline: 'none', color: filterStatus ? '#F7C83C' : '#888' }}
                 >
                   <option value="">All Statuses</option>
                   {STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
@@ -227,7 +227,7 @@ export default function AdminDashboard() {
                 <button
                   onClick={exportLeads}
                   aria-label="Export leads to Excel"
-                  style={{ padding: '7px 16px', background: '#FFC800', color: '#0a0a0a', border: 'none', borderRadius: 6, fontSize: '0.72rem', fontWeight: 700, cursor: 'pointer', letterSpacing: '0.08em', textTransform: 'uppercase' }}
+                  style={{ padding: '7px 16px', background: '#F7C83C', color: '#0a0a0a', border: 'none', borderRadius: 6, fontSize: '0.72rem', fontWeight: 700, cursor: 'pointer', letterSpacing: '0.08em', textTransform: 'uppercase' }}
                 >
                   ↓ Export
                 </button>
@@ -244,7 +244,7 @@ export default function AdminDashboard() {
                 {Object.entries(grouped).map(([month, monthLeads]) => (
                   <div key={month} style={{ border: '1px solid rgba(255,255,255,0.06)', borderRadius: 12, overflow: 'hidden' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', background: 'rgba(255,200,0,0.04)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                      <span style={{ fontSize: '0.68rem', fontWeight: 700, color: '#FFC800', letterSpacing: '0.12em', textTransform: 'uppercase' }}>{month}</span>
+                      <span style={{ fontSize: '0.68rem', fontWeight: 700, color: '#F7C83C', letterSpacing: '0.12em', textTransform: 'uppercase' }}>{month}</span>
                       <span style={{ fontSize: '0.65rem', color: '#555' }}>{monthLeads.length} {monthLeads.length === 1 ? 'lead' : 'leads'}</span>
                     </div>
                     <div style={{ overflowX: 'auto' }}>
@@ -263,7 +263,7 @@ export default function AdminDashboard() {
                             return (
                               <>
                                 <tr key={`row-${l.id}`} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', background: isOpen ? 'rgba(255,200,0,0.03)' : 'transparent' }}>
-                                  <td style={{ padding: '12px 16px', fontWeight: 600, color: '#FFC800', whiteSpace: 'nowrap', fontFamily: 'monospace', fontSize: '0.72rem' }}>{l.referenceId}</td>
+                                  <td style={{ padding: '12px 16px', fontWeight: 600, color: '#F7C83C', whiteSpace: 'nowrap', fontFamily: 'monospace', fontSize: '0.72rem' }}>{l.referenceId}</td>
                                   <td style={{ padding: '12px 16px', color: '#555', whiteSpace: 'nowrap' }}>{new Date(l.createdAt).toLocaleDateString('en-IN')}</td>
                                   <td style={{ padding: '12px 16px', fontWeight: 500, color: '#ddd' }}>{l.name}</td>
                                   <td style={{ padding: '12px 16px', color: '#888', whiteSpace: 'nowrap' }}>{l.phone}</td>
@@ -286,7 +286,7 @@ export default function AdminDashboard() {
                                         onClick={() => toggleExpand(l)}
                                         aria-expanded={isOpen}
                                         aria-label={isOpen ? 'Collapse lead details' : 'Expand lead details'}
-                                        style={{ fontSize: '0.65rem', padding: '4px 10px', background: isOpen ? 'rgba(255,200,0,0.12)' : 'rgba(255,255,255,0.05)', border: `1px solid ${isOpen ? 'rgba(255,200,0,0.3)' : 'rgba(255,255,255,0.08)'}`, borderRadius: 4, cursor: 'pointer', color: isOpen ? '#FFC800' : '#888', whiteSpace: 'nowrap' }}
+                                        style={{ fontSize: '0.65rem', padding: '4px 10px', background: isOpen ? 'rgba(255,200,0,0.12)' : 'rgba(255,255,255,0.05)', border: `1px solid ${isOpen ? 'rgba(255,200,0,0.3)' : 'rgba(255,255,255,0.08)'}`, borderRadius: 4, cursor: 'pointer', color: isOpen ? '#F7C83C' : '#888', whiteSpace: 'nowrap' }}
                                       >
                                         {isOpen ? '▲ Close' : '▼ Details'}
                                       </button>
@@ -327,7 +327,7 @@ export default function AdminDashboard() {
                                           />
                                           <button
                                             onClick={() => saveNotes(l.id)}
-                                            style={{ padding: '6px 14px', background: '#FFC800', color: '#0a0a0a', border: 'none', borderRadius: 6, fontSize: '0.7rem', fontWeight: 700, cursor: 'pointer', letterSpacing: '0.08em', textTransform: 'uppercase', alignSelf: 'flex-end' }}
+                                            style={{ padding: '6px 14px', background: '#F7C83C', color: '#0a0a0a', border: 'none', borderRadius: 6, fontSize: '0.7rem', fontWeight: 700, cursor: 'pointer', letterSpacing: '0.08em', textTransform: 'uppercase', alignSelf: 'flex-end' }}
                                           >
                                             Save Notes
                                           </button>

@@ -25,7 +25,7 @@ export default function AdminLogin() {
     <div style={{ minHeight: '100vh', background: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
       <div style={{ background: '#fff', border: '1px solid #ebebeb', borderRadius: 8, padding: '2.5rem', width: '100%', maxWidth: 380, boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <svg width="36" height="36" viewBox="0 0 34 34" fill="none" style={{ margin: '0 auto 10px' }}><path d="M4 4 H24 Q30 4 30 10 V30 Q20 30 12 22 Q4 14 4 4Z" fill="#0a0a0a" /><path d="M2 22 Q2 32 12 32 L12 25 Q7 25 7 20Z" fill="#FFC800" /></svg>
+          <svg width="36" height="36" viewBox="0 0 34 34" fill="none" style={{ margin: '0 auto 10px' }}><path d="M4 4 H24 Q30 4 30 10 V30 Q20 30 12 22 Q4 14 4 4Z" fill="#0a0a0a" /><path d="M2 22 Q2 32 12 32 L12 25 Q7 25 7 20Z" fill="#F7C83C" /></svg>
           <p style={{ fontWeight: 700, fontSize: '1.1rem', color: '#0a0a0a' }}>Samruthi One</p>
           <p style={{ fontSize: '0.65rem', color: '#aaa', letterSpacing: '0.15em', textTransform: 'uppercase' }}>Admin Portal</p>
         </div>

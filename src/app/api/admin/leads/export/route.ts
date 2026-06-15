@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
 
   ws.getRow(1).eachCell(cell => {
     cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF0A0A0A' } }
-    cell.font = { bold: true, color: { argb: 'FFFFC800' }, size: 10 }
+    cell.font = { bold: true, color: { argb: 'FFF7C83C' }, size: 10 }
     cell.alignment = { vertical: 'middle' }
   })
   ws.getRow(1).height = 22

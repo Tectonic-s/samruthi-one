@@ -29,14 +29,14 @@ export default function ServicePage({ params }: Props) {
         {/* Back navigation */}
         <Link
           href="/services"
-          className="inline-flex items-center gap-2 text-sm text-[#FFC800] font-semibold hover:underline mb-8"
+          className="inline-flex items-center gap-2 text-sm text-[#F7C83C] font-semibold hover:underline mb-8"
         >
           &larr; All Services
         </Link>
 
         {/* Hero glass banner */}
-        <div className="bg-gray-950/80 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/10 shadow-2xl mb-8">
-          <p className="text-xs font-semibold tracking-widest uppercase text-[#FFC800] mb-3">
+        <div className="bg-gray-950/30 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/15 shadow-2xl mb-8">
+          <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">
             {s.category}
           </p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-4">
@@ -52,7 +52,7 @@ export default function ServicePage({ params }: Props) {
           {/* Main Info */}
           <div className="lg:col-span-8 space-y-6">
             {/* About Facility */}
-            <div className="bg-gray-950/80 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/10 shadow-xl hover:border-[#FFC800]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
+            <div className="bg-gray-950/30 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/15 shadow-xl hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
               <h2 className="text-xl font-bold text-white mb-4 tracking-tight">About this facility</h2>
               <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
                 {s.fullDesc}
@@ -61,28 +61,28 @@ export default function ServicePage({ params }: Props) {
 
             {/* Eligibility & Documents */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="bg-gray-950/80 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/10 shadow-xl hover:border-[#FFC800]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
-                <h3 className="text-xs font-bold tracking-widest uppercase text-[#FFC800] mb-4">
+              <div className="bg-gray-950/30 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/15 shadow-xl hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
+                <h3 className="text-xs font-bold tracking-widest uppercase text-[#F7C83C] mb-4">
                   Eligibility Criteria
                 </h3>
                 <ul className="space-y-3">
                   {s.eligibility.map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-300">
-                      <span className="text-[#FFC800] font-bold text-base leading-none select-none">&bull;</span>
+                      <span className="text-[#F7C83C] font-bold text-base leading-none select-none">&bull;</span>
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="bg-gray-950/80 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/10 shadow-xl hover:border-[#FFC800]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
-                <h3 className="text-xs font-bold tracking-widest uppercase text-[#FFC800] mb-4">
+              <div className="bg-gray-950/30 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/15 shadow-xl hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
+                <h3 className="text-xs font-bold tracking-widest uppercase text-[#F7C83C] mb-4">
                   Documents Required
                 </h3>
                 <ul className="space-y-3">
                   {s.documents.map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-300">
-                      <span className="text-[#FFC800] font-bold text-base leading-none select-none">&bull;</span>
+                      <span className="text-[#F7C83C] font-bold text-base leading-none select-none">&bull;</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -91,12 +91,12 @@ export default function ServicePage({ params }: Props) {
             </div>
 
             {/* Metrics */}
-            <div className="grid grid-cols-2 gap-4 bg-gray-950/40 border border-white/10 rounded-[2rem] overflow-hidden p-1 shadow-lg">
-              <div className="bg-gray-950/80 backdrop-blur-xl p-6 text-center">
+            <div className="grid grid-cols-2 gap-4 bg-gray-950/40 border border-white/15 rounded-[2rem] overflow-hidden p-1 shadow-lg">
+              <div className="bg-gray-950/30 backdrop-blur-xl p-6 text-center">
                 <p className="text-[0.62rem] font-bold tracking-widest uppercase text-gray-400 mb-2">Loan Range</p>
                 <p className="text-xl sm:text-2xl font-extrabold text-white">{s.loanRange}</p>
               </div>
-              <div className="bg-gray-950/80 backdrop-blur-xl p-6 text-center">
+              <div className="bg-gray-950/30 backdrop-blur-xl p-6 text-center">
                 <p className="text-[0.62rem] font-bold tracking-widest uppercase text-gray-400 mb-2">Processing Time</p>
                 <p className="text-xl sm:text-2xl font-extrabold text-white">{s.processingTime}</p>
               </div>
@@ -105,21 +105,21 @@ export default function ServicePage({ params }: Props) {
 
           {/* Sticky Sidebar */}
           <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
-            <div className="bg-gray-950/80 backdrop-blur-xl p-8 rounded-[2rem] border border-white/10 shadow-2xl text-center hover:border-[#FFC800]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
+            <div className="bg-gray-950/30 backdrop-blur-xl p-8 rounded-[2rem] border border-white/15 shadow-2xl text-center hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
               <h3 className="text-lg font-bold text-white mb-2">Interested?</h3>
               <p className="text-xs text-gray-400 mb-6 leading-relaxed">
                 A relationship manager will evaluate your case and respond within 2 business hours.
               </p>
               <Link
                 href={`/enquiry?facility=${encodeURIComponent(s.name)}`}
-                className="block w-full bg-[#FFC800] text-gray-900 font-bold py-3.5 rounded-xl text-xs uppercase tracking-widest hover:bg-[#E6B400] transition-colors shadow-lg"
+                className="block w-full bg-[#F7C83C] text-gray-900 font-bold py-3.5 rounded-xl text-xs uppercase tracking-widest hover:bg-[#D4A832] transition-colors shadow-lg"
               >
                 Begin Enquiry
               </Link>
             </div>
 
-            <div className="bg-gray-950/80 backdrop-blur-xl p-8 rounded-[2rem] border border-white/10 shadow-xl hover:border-[#FFC800]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
-              <h4 className="text-[0.65rem] font-bold tracking-widest uppercase text-[#FFC800] mb-4">
+            <div className="bg-gray-950/30 backdrop-blur-xl p-8 rounded-[2rem] border border-white/15 shadow-xl hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
+              <h4 className="text-[0.65rem] font-bold tracking-widest uppercase text-[#F7C83C] mb-4">
                 Assistance Info
               </h4>
               <div className="space-y-4">

@@ -14,7 +14,7 @@ export async function sendConfirmation({ to, name, referenceId, facility }: { to
     html: `<div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:32px">
       <div style="background:#0a0a0a;padding:20px 28px;border-radius:4px 4px 0 0">
         <span style="color:#fff;font-weight:700;font-size:1.1rem">Samruthi One</span>
-        <span style="color:#FFC800;font-size:0.7rem;margin-left:10px;letter-spacing:0.1em;text-transform:uppercase">Financing Simplified</span>
+        <span style="color:#F7C83C;font-size:0.7rem;margin-left:10px;letter-spacing:0.1em;text-transform:uppercase">Financing Simplified</span>
       </div>
       <div style="border:1px solid #e8e8e8;border-top:none;padding:28px;border-radius:0 0 4px 4px">
         <p style="color:#333;margin-bottom:16px">Dear ${name},</p>
@@ -42,7 +42,7 @@ export async function sendAdminAlert({ referenceId, name, phone, email, facility
       <table style="width:100%;border-collapse:collapse;font-size:0.875rem">
         ${[['Ref ID',referenceId],['Name',name],['Phone',phone],['Email',email],['Facility',facility],['Loan Amount',loanAmount]].map(([l,v],i)=>`<tr style="background:${i%2===0?'#f9f9f9':'#fff'}"><td style="padding:10px 14px;color:#888;width:35%;border:1px solid #ebebeb">${l}</td><td style="padding:10px 14px;color:#0a0a0a;border:1px solid #ebebeb"><strong>${v}</strong></td></tr>`).join('')}
       </table>
-      <a href="${process.env.NEXTAUTH_URL ?? 'http://localhost:5030'}/admin" style="display:inline-block;margin-top:20px;background:#0a0a0a;color:#FFC800;padding:12px 24px;text-decoration:none;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-radius:3px">View in Dashboard →</a>
+      <a href="${process.env.NEXTAUTH_URL ?? 'http://localhost:5030'}/admin" style="display:inline-block;margin-top:20px;background:#0a0a0a;color:#F7C83C;padding:12px 24px;text-decoration:none;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-radius:3px">View in Dashboard →</a>
     </div>`,
   })
 }

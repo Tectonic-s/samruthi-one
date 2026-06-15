@@ -37,7 +37,7 @@ export default function PageLoader() {
 
       <div className="w-40 h-[2px] bg-white/10 rounded-full overflow-hidden">
         <div
-          className="h-full bg-[#FFC800] rounded-full"
+          className="h-full bg-[#F7C83C] rounded-full"
           style={{ animation: 'loaderBar 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both' }}
         />
       </div>

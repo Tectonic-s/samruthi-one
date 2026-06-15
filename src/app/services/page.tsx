@@ -14,8 +14,8 @@ export default function ServicesPage() {
     <>
       <section className="py-16 lg:py-20 relative z-10">
         <div className="w-full mx-auto px-4 lg:px-6">
-          <div className="bg-gray-950/80 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/10 shadow-2xl">
-            <p className="text-xs font-semibold tracking-widest uppercase text-[#FFC800] mb-3">Products & Solutions</p>
+          <div className="bg-gray-950/30 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/15 shadow-2xl">
+            <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">Products & Solutions</p>
             <h1 className="text-4xl lg:text-5xl font-bold text-white tracking-tight mb-4">Credit for Every Stage of Growth</h1>
             <p className="text-gray-300 leading-relaxed max-w-2xl">
               From revolving working capital lines to structured property loans — we source, structure, and facilitate the right product for your business through 20+ lender partners.

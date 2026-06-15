@@ -19,11 +19,11 @@ export default function EnquiryPage({ searchParams }: Props) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left panel contact info */}
-          <div className="lg:col-span-5 bg-gray-950/80 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/10 shadow-2xl space-y-8">
+          <div className="lg:col-span-5 bg-gray-950/30 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/15 shadow-2xl space-y-8">
             <div>
-              <p className="text-xs font-semibold tracking-widest uppercase text-[#FFC800] mb-3">Get In Touch</p>
+              <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">Get In Touch</p>
               <h1 className="text-3xl font-extrabold text-white tracking-tight leading-tight mb-4">
-                Let&apos;s Find the Right <span className="text-[#FFC800]">Capital Structure</span>
+                Let&apos;s Find the Right <span className="text-[#F7C83C]">Capital Structure</span>
               </h1>
               <p className="text-sm text-gray-300 leading-relaxed">
                 Fill in the details regarding your commercial financing requirement and a specialized advisor will contact you within 2 business hours.
@@ -64,13 +64,13 @@ export default function EnquiryPage({ searchParams }: Props) {
 
             <div className="h-px bg-white/10" />
 
-            <p className="text-[0.7rem] text-[#FFC800] font-semibold tracking-wider">
+            <p className="text-[0.7rem] text-[#F7C83C] font-semibold tracking-wider">
               CIN: {SITE_CONFIG.company.cin}
             </p>
           </div>
 
           {/* Right panel form glass card */}
-          <div className="lg:col-span-7 bg-gray-950/80 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/10 shadow-2xl">
+          <div className="lg:col-span-7 bg-gray-950/30 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/15 shadow-2xl">
             <h2 className="text-2xl font-bold text-white mb-2 tracking-tight">Begin your enquiry</h2>
             <p className="text-xs text-gray-400 mb-8">Fields marked with asterisk (*) are required.</p>
             <EnquiryForm defaultFacility={searchParams.facility ?? ''} />

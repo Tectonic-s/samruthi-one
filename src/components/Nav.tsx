@@ -37,29 +37,26 @@ export default function Nav() {
   const isActive = (href: string) => pathname === href
 
   return (
-    <nav className={`sticky top-0 z-50 bg-white transition-all duration-300 ${mounted && scrolled ? 'shadow-md border-b border-gray-200' : 'border-b border-gray-100'}`}>
+    <nav className={`sticky top-0 z-50 bg-[#F7C83C] border-b border-black/10 transition-all duration-300 ${mounted && scrolled ? 'shadow-md' : ''}`}>
       <div className="w-full mx-auto px-4 lg:px-6">
-        <div className="flex items-center justify-between h-16">
+        <div className="relative flex items-center justify-between h-20 w-full">
 
-          <Logo variant="dark" />
+          <Logo />
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop links - absolutely centred to the full nav width */}
+          <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 aria-current={isActive(link.href) ? 'page' : undefined}
-                className={`text-sm transition-all relative py-1 ${
+                className={`text-sm font-bold transition-all relative py-1 ${
                   isActive(link.href)
-                    ? 'text-gray-900 font-bold'
-                    : 'text-gray-600 font-medium hover:text-gray-900'
+                    ? 'text-black after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-black after:rounded-full'
+                    : 'text-black/60 hover:text-black'
                 }`}
               >
                 {link.label}
-                {isActive(link.href) && (
-                  <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-[#FFC800] rounded-full -translate-x-1/2" />
-                )}
               </Link>
             ))}
           </div>
@@ -68,7 +65,7 @@ export default function Nav() {
           <div className="hidden md:block">
             <Link
               href="/enquiry"
-              className="bg-[#FFC800] text-gray-900 font-semibold px-6 py-2.5 rounded-full text-xs uppercase tracking-wider hover:bg-[#E6B400] transition-colors"
+              className="bg-black text-[#F7C83C] font-semibold px-6 py-2.5 rounded-full text-xs uppercase tracking-wider hover:bg-black/80 transition-colors"
             >
               Enquire Now
             </Link>
@@ -76,7 +73,7 @@ export default function Nav() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 text-gray-800 focus:outline-none"
+            className="md:hidden p-2 text-black focus:outline-none"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation menu"
             aria-expanded={menuOpen}
@@ -96,14 +93,14 @@ export default function Nav() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div id="mobile-menu" className="md:hidden border-t border-gray-100 py-3 bg-white">
+          <div id="mobile-menu" className="md:hidden border-t border-black/10 py-3 bg-[#F7C83C]">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className={`block px-2 py-3 text-sm font-medium border-b border-gray-100 ${
-                  isActive(link.href) ? 'text-gray-900 font-bold' : 'text-gray-600'
+                className={`block px-2 py-3 text-sm font-bold border-b border-black/10 ${
+                  isActive(link.href) ? 'text-black font-bold border-l-4 border-l-black pl-3' : 'text-black/60'
                 }`}
               >
                 {link.label}
@@ -112,7 +109,7 @@ export default function Nav() {
             <Link
               href="/enquiry"
               onClick={() => setMenuOpen(false)}
-              className="block mt-4 mx-2 bg-[#FFC800] text-center rounded-full text-gray-900 font-semibold px-6 py-3 text-sm hover:bg-[#E6B400] transition-colors"
+              className="block mt-4 mx-2 bg-black text-center rounded-full text-[#F7C83C] font-semibold px-6 py-3 text-sm hover:bg-black/80 transition-colors"
             >
               Enquire Now
             </Link>

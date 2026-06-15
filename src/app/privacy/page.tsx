@@ -56,8 +56,8 @@ export default function PrivacyPolicyPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="bg-gray-950/80 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/10 shadow-2xl mb-8">
-          <p className="text-xs font-semibold tracking-widest uppercase text-[#FFC800] mb-3">Legal</p>
+        <div className="bg-gray-950/30 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/15 shadow-2xl mb-8">
+          <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">Legal</p>
           <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4">Privacy Policy</h1>
           <p className="text-gray-400 text-sm leading-relaxed">
             Last updated: January 2025 &nbsp;·&nbsp; CIN: {SITE_CONFIG.company.cin}
@@ -72,7 +72,7 @@ export default function PrivacyPolicyPage() {
           {sections.map((section) => (
             <div
               key={section.title}
-              className="bg-gray-950/80 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/10 shadow-lg"
+              className="bg-gray-950/30 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/15 shadow-lg"
             >
               <h2 className="text-base font-bold text-white mb-3 tracking-tight">{section.title}</h2>
               <p className="text-sm text-gray-300 leading-relaxed">{section.content}</p>
@@ -82,11 +82,11 @@ export default function PrivacyPolicyPage() {
 
         {/* Back link */}
         <div className="mt-10 text-center">
-          <Link href="/" className="text-[#FFC800] text-sm font-semibold hover:underline">
+          <Link href="/" className="text-[#F7C83C] text-sm font-semibold hover:underline">
             &larr; Back to Home
           </Link>
           <span className="text-gray-600 mx-4">·</span>
-          <Link href="/terms" className="text-[#FFC800] text-sm font-semibold hover:underline">
+          <Link href="/terms" className="text-[#F7C83C] text-sm font-semibold hover:underline">
             Terms &amp; Conditions &rarr;
           </Link>
         </div>

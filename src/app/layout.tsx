@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
+import bgImage from '../../public/logos/bg.jpg'
 import './globals.css'
 import Providers from '@/components/Providers'
 import Shell from '@/components/Shell'
@@ -24,15 +25,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${inter.className} text-white antialiased min-h-screen flex flex-col relative`}>
         {/* Fixed Background — public site only */}
-        <div className="fixed inset-0 z-[-1] [.s1-portal_&]:hidden">
+        <div className="fixed inset-0 z-[-1]">
           <Image
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2940&auto=format&fit=crop"
-            alt=""
-            fill
+            src={bgImage}
+            alt="Samruthi One Corporate Background"
+            placeholder="blur"
+            quality={90}
             priority
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            fill
+            className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-gray-950/95 to-gray-950" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-gray-950/50 to-gray-950/70" />
         </div>
         <Providers>
           <Shell>{children}</Shell>

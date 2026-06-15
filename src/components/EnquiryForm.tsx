@@ -76,7 +76,7 @@ export default function EnquiryForm({ defaultFacility = '' }: { defaultFacility?
     }
   }
 
-  const inputClass = "w-full bg-gray-900/60 border border-white/10 text-white rounded-xl focus:border-[#FFC800] focus:ring-1 focus:ring-[#FFC800] focus:bg-gray-950 px-4 py-3 text-sm transition-all outline-none placeholder-gray-500 appearance-none"
+  const inputClass = "w-full bg-gray-900/25 border border-white/15 text-white rounded-xl focus:border-[#F7C83C] focus:ring-1 focus:ring-[#F7C83C] focus:bg-gray-950 px-4 py-3 text-sm transition-all outline-none placeholder-gray-500 appearance-none"
   const labelClass = "block text-[0.68rem] font-semibold tracking-widest uppercase text-gray-400 mb-2"
   const errClass = "text-red-400 text-xs mt-1.5 font-medium"
 
@@ -221,11 +221,11 @@ export default function EnquiryForm({ defaultFacility = '' }: { defaultFacility?
             type="checkbox"
             checked={form.consent}
             onChange={(e) => set('consent', e.target.checked)}
-            className="mt-1.5 accent-[#FFC800] h-4 w-4 rounded border-white/10 bg-gray-900 text-[#FFC800] focus:ring-0 focus:ring-offset-0"
+            className="mt-1.5 accent-[#F7C83C] h-4 w-4 rounded border-white/15 bg-gray-900 text-[#F7C83C] focus:ring-0 focus:ring-offset-0"
           />
           <span className="text-xs text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
-            I agree to the <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[#FFC800] font-semibold hover:underline">Privacy Policy</a> and{' '}
-            <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-[#FFC800] font-semibold hover:underline">Terms</a> and consent to being contacted by Samruthi One.
+            I agree to the <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[#F7C83C] font-semibold hover:underline">Privacy Policy</a> and{' '}
+            <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-[#F7C83C] font-semibold hover:underline">Terms</a> and consent to being contacted by Samruthi One.
           </span>
         </label>
         {errors.consent && <p className={errClass}>{errors.consent}</p>}
@@ -240,7 +240,7 @@ export default function EnquiryForm({ defaultFacility = '' }: { defaultFacility?
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-[#FFC800] text-gray-900 font-bold py-4 rounded-xl hover:bg-[#E6B400] transition-colors tracking-widest text-xs uppercase shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-[#F7C83C] text-gray-900 font-bold py-4 rounded-xl hover:bg-[#D4A832] transition-colors tracking-widest text-xs uppercase shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? 'Submitting...' : 'Submit Enquiry'}
       </button>

@@ -12,10 +12,10 @@ export default function PartnersPage() {
       <div className="w-full mx-auto px-4 lg:px-6">
         
         {/* Banner glass element */}
-        <div className="bg-gray-950/80 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/10 shadow-2xl mb-8">
-          <p className="text-xs font-semibold tracking-widest uppercase text-[#FFC800] mb-3">Our Synergy</p>
+        <div className="bg-gray-950/30 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/15 shadow-2xl mb-8">
+          <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">Our Synergy</p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
-            Partners Who <span className="text-[#FFC800]">Deliver</span>
+            Partners Who <span className="text-[#F7C83C]">Deliver</span>
           </h1>
           <p className="text-gray-300 mt-4 leading-relaxed max-w-2xl text-sm sm:text-base">
             By partnering with India&apos;s leading banking institutions and Fintech lenders, we negotiate terms, speed up approvals, and secure credit lines where others cannot.
@@ -43,9 +43,9 @@ export default function PartnersPage() {
           ].map((item) => (
             <div 
               key={item.title} 
-              className="bg-gray-950/80 backdrop-blur-xl p-8 rounded-[2rem] border border-white/10 shadow-xl hover:border-[#FFC800]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out group"
+              className="bg-gray-950/30 backdrop-blur-xl p-8 rounded-[2rem] border border-white/15 shadow-xl hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out group"
             >
-              <h3 className="text-lg font-bold text-white mb-3 group-hover:text-[#FFC800] transition-colors">
+              <h3 className="text-lg font-bold text-white mb-3 group-hover:text-[#F7C83C] transition-colors">
                 {item.title}
               </h3>
               <p className="text-sm text-gray-400 leading-relaxed">
