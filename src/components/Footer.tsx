@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-12">
           {/* Company Intro */}
           <div className="md:col-span-4 flex flex-col space-y-4">
-            <Logo variant="light" />
+            <Logo />
             
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">
               RBI-registered Fintech providing working capital, trade finance, and property loans with multi-bank access for businesses across India.
