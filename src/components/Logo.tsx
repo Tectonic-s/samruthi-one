@@ -10,7 +10,7 @@ export default function Logo() {
         width={240}
         height={240}
         priority
-        style={{ objectFit: 'contain', filter: 'drop-shadow(0 0 0 1px black)', height: '45px', width: 'auto' }}
+        style={{ objectFit: 'contain', filter: 'brightness(0) invert(1)', height: '38px', width: 'auto' }}
       />
     </Link>
   )

@@ -34,7 +34,7 @@ function LogoChip({ name }: { name: string }) {
   const logoFile = partnerLogo[name]
 
   return (
-    <div className="group inline-flex items-center gap-2 pl-1.5 pr-4 py-1.5 rounded-full border border-white/15 bg-white/8 backdrop-blur-sm hover:border-[#F7C83C]/60 hover:bg-white/10 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-1 transition-all duration-500 ease-out cursor-default">
+    <div className="group inline-flex items-center gap-2 pl-1.5 pr-4 py-1.5 rounded-full border border-white/20 bg-white/8 backdrop-blur-sm hover:border-[#F7C83C]/60 hover:bg-white/10 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-1 transition-all duration-500 ease-out cursor-default">
       <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center overflow-hidden flex-shrink-0 shadow-sm">
         <Image
           src={`/logos/${logoFile}`}
@@ -54,7 +54,7 @@ function LogoChip({ name }: { name: string }) {
 export default function PartnerGrid() {
   return (
     <section className="py-16 lg:py-24">
-      <div className="w-full mx-auto px-4 lg:px-6 bg-gray-950/30 backdrop-blur-xl border border-white/15 rounded-[2rem] p-8 sm:p-12 shadow-2xl">
+      <div className="w-full mx-auto px-4 lg:px-6 bg-gray-950/50 backdrop-blur-xl border border-white/20 rounded-[2rem] p-8 sm:p-12 shadow-2xl">
         <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">Our Network</p>
         <h2 className="text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">Lender Partners</h2>
         <p className="text-gray-300 leading-relaxed mb-12 max-w-2xl">

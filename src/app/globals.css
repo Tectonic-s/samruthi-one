@@ -6,33 +6,67 @@
   html {
     scroll-behavior: smooth;
     overscroll-behavior: none;
-    /* No background-color here — keeps body's bg-gray-950 propagated to the
-       canvas so the fixed background div at z-[-1] remains visible */
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold tracking-tight text-white;
   }
   body {
     @apply text-gray-200 antialiased;
-    background-color: transparent; /* must stay transparent so canvas stays dark via propagation */
+    background-color: transparent;
     overscroll-behavior: none;
   }
 }
-
-
 
 @layer utilities {
   .dot-grid {
     background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
     background-size: 24px 24px;
   }
-  .fade-in {
+
+  /* Scroll reveal */
+  .fade-up {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
-  .fade-in.visible {
+  .fade-up.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* Page transition */
+  .page-enter {
+    animation: pageEnter 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes pageEnter {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Nav logo entrance */
+  .nav-logo-enter {
+    animation: navLogoEnter 0.6s ease 2.0s both;
+  }
+  @keyframes navLogoEnter {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* Nav links stagger */
+  .nav-link-enter {
+    animation: navLinkEnter 0.5s ease both;
+  }
+  @keyframes navLinkEnter {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* CTA pulse glow */
+  .pulse-glow {
+    animation: pulseGlow 2.5s ease-in-out infinite;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(247,200,60,0); }
+    50%       { box-shadow: 0 0 16px 4px rgba(247,200,60,0.25); }
   }
 }

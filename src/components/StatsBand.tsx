@@ -4,7 +4,7 @@ export default function StatsBand() {
   return (
     <section className="py-12 bg-transparent">
       <div className="w-full mx-auto px-4 lg:px-6">
-        <div className="bg-gray-950/30 backdrop-blur-xl border border-white/15 rounded-[2rem] p-8 sm:p-12 shadow-2xl">
+        <div className="bg-gray-950/50 backdrop-blur-xl border border-white/20 rounded-[2rem] p-8 sm:p-12 shadow-2xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-white/10">
             {SITE_CONFIG.stats.map((stat, i) => (
               <div 

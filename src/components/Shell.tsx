@@ -14,7 +14,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     <>
       <PageLoader />
       <Nav />
-      <main className="flex-grow flex flex-col">{children}</main>
+      <main key={pathname} className="flex-grow flex flex-col page-enter">{children}</main>
       <Footer />
     </>
   )

@@ -7,7 +7,7 @@ interface Testimonial {
 
 export default function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; index: number }) {
   return (
-    <div className="bg-gray-900/25 backdrop-blur-xl border border-white/15 rounded-[2rem] p-8 h-full hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out flex flex-col relative overflow-hidden group">
+    <div className="bg-gray-900/50 backdrop-blur-xl border border-white/20 rounded-[2rem] p-8 h-full hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out flex flex-col relative overflow-hidden group">
       {/* Visual background details */}
       <span className="absolute -right-4 -top-8 text-white/5 text-9xl font-serif select-none pointer-events-none group-hover:text-[#F7C83C]/10 transition-colors duration-300">
         &ldquo;

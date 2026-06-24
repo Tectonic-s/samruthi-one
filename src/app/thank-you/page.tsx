@@ -12,7 +12,7 @@ export default function ThankYouPage({ searchParams }: { searchParams: { ref?: s
   return (
     <div className="py-16 sm:py-24 relative z-10 flex-grow flex items-center">
       <div className="max-w-xl mx-auto px-4 w-full">
-        <div className="bg-gray-950/30 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/15 shadow-2xl text-center">
+        <div className="bg-gray-950/50 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/20 shadow-2xl text-center">
           
           {/* Checkmark icon with yellow backglow */}
           <div className="w-16 h-16 rounded-full bg-[#F7C83C] text-gray-900 font-extrabold flex items-center justify-center text-3xl mx-auto mb-6 shadow-[0_0_20px_rgba(255,193,7,0.3)]">
@@ -28,7 +28,7 @@ export default function ThankYouPage({ searchParams }: { searchParams: { ref?: s
           </p>
 
           {/* Reference ID card block */}
-          <div className="bg-gray-900/40 border border-white/15 rounded-2xl p-6 mb-8 inline-block w-full max-w-sm">
+          <div className="bg-gray-900/40 border border-white/20 rounded-2xl p-6 mb-8 inline-block w-full max-w-sm">
             <p className="text-[0.62rem] font-bold tracking-widest uppercase text-gray-500 mb-2">
               Reference ID
             </p>

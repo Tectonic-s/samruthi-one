@@ -76,7 +76,7 @@ export default function EnquiryForm({ defaultFacility = '' }: { defaultFacility?
     }
   }
 
-  const inputClass = "w-full bg-gray-900/25 border border-white/15 text-white rounded-xl focus:border-[#F7C83C] focus:ring-1 focus:ring-[#F7C83C] focus:bg-gray-950 px-4 py-3 text-sm transition-all outline-none placeholder-gray-500 appearance-none"
+  const inputClass = "w-full bg-gray-900/50 border border-white/20 text-white rounded-xl focus:border-[#F7C83C] focus:ring-1 focus:ring-[#F7C83C] focus:bg-gray-950 px-4 py-3 text-sm transition-all outline-none placeholder-gray-500 appearance-none"
   const labelClass = "block text-[0.68rem] font-semibold tracking-widest uppercase text-gray-400 mb-2"
   const errClass = "text-red-400 text-xs mt-1.5 font-medium"
 
@@ -221,7 +221,7 @@ export default function EnquiryForm({ defaultFacility = '' }: { defaultFacility?
             type="checkbox"
             checked={form.consent}
             onChange={(e) => set('consent', e.target.checked)}
-            className="mt-1.5 accent-[#F7C83C] h-4 w-4 rounded border-white/15 bg-gray-900 text-[#F7C83C] focus:ring-0 focus:ring-offset-0"
+            className="mt-1.5 accent-[#F7C83C] h-4 w-4 rounded border-white/20 bg-gray-900 text-[#F7C83C] focus:ring-0 focus:ring-offset-0"
           />
           <span className="text-xs text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
             I agree to the <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[#F7C83C] font-semibold hover:underline">Privacy Policy</a> and{' '}
