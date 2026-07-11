@@ -35,7 +35,7 @@ export default function ServicePage({ params }: Props) {
         </Link>
 
         {/* Hero glass banner */}
-        <div className="bg-gray-950/50 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/20 shadow-2xl mb-8">
+        <div className="bg-white/5 border border-white/10 mb-8">
           <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">
             {s.category}
           </p>
@@ -52,7 +52,7 @@ export default function ServicePage({ params }: Props) {
           {/* Main Info */}
           <div className="lg:col-span-8 space-y-6">
             {/* About Facility */}
-            <div className="bg-gray-950/50 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/20 shadow-xl hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
+            <div className="bg-white/5 border border-white/10 hover:border-[#FFC107]/40 transition-all duration-300">
               <h2 className="text-xl font-bold text-white mb-4 tracking-tight">About this facility</h2>
               <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
                 {s.fullDesc}
@@ -61,7 +61,7 @@ export default function ServicePage({ params }: Props) {
 
             {/* Eligibility & Documents */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="bg-gray-950/50 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/20 shadow-xl hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
+              <div className="bg-white/5 border border-white/10 hover:border-[#FFC107]/40 transition-all duration-300">
                 <h3 className="text-xs font-bold tracking-widest uppercase text-[#F7C83C] mb-4">
                   Eligibility Criteria
                 </h3>
@@ -75,7 +75,7 @@ export default function ServicePage({ params }: Props) {
                 </ul>
               </div>
 
-              <div className="bg-gray-950/50 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/20 shadow-xl hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
+              <div className="bg-white/5 border border-white/10 hover:border-[#FFC107]/40 transition-all duration-300">
                 <h3 className="text-xs font-bold tracking-widest uppercase text-[#F7C83C] mb-4">
                   Documents Required
                 </h3>
@@ -91,12 +91,12 @@ export default function ServicePage({ params }: Props) {
             </div>
 
             {/* Metrics */}
-            <div className="grid grid-cols-2 gap-4 bg-gray-950/50 border border-white/20 rounded-[2rem] overflow-hidden p-1 shadow-lg">
-              <div className="bg-gray-950/50 backdrop-blur-xl p-6 text-center">
+            <div className="grid grid-cols-2 gap-4 bg-white/5 border border-white/10 overflow-hidden">
+              <div className="bg-transparent p-6 text-center">
                 <p className="text-[0.62rem] font-bold tracking-widest uppercase text-gray-400 mb-2">Loan Range</p>
                 <p className="text-xl sm:text-2xl font-extrabold text-white">{s.loanRange}</p>
               </div>
-              <div className="bg-gray-950/50 backdrop-blur-xl p-6 text-center">
+              <div className="bg-transparent p-6 text-center">
                 <p className="text-[0.62rem] font-bold tracking-widest uppercase text-gray-400 mb-2">Processing Time</p>
                 <p className="text-xl sm:text-2xl font-extrabold text-white">{s.processingTime}</p>
               </div>
@@ -105,7 +105,7 @@ export default function ServicePage({ params }: Props) {
 
           {/* Sticky Sidebar */}
           <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
-            <div className="bg-gray-950/50 backdrop-blur-xl p-8 rounded-[2rem] border border-white/20 shadow-2xl text-center hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
+            <div className="bg-white/5 border border-white/10 hover:border-[#FFC107]/40 transition-all duration-300">
               <h3 className="text-lg font-bold text-white mb-2">Interested?</h3>
               <p className="text-xs text-gray-400 mb-6 leading-relaxed">
                 A relationship manager will evaluate your case and respond within 2 business hours.
@@ -118,7 +118,7 @@ export default function ServicePage({ params }: Props) {
               </Link>
             </div>
 
-            <div className="bg-gray-950/50 backdrop-blur-xl p-8 rounded-[2rem] border border-white/20 shadow-xl hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
+            <div className="bg-white/5 border border-white/10 hover:border-[#FFC107]/40 transition-all duration-300">
               <h4 className="text-[0.65rem] font-bold tracking-widest uppercase text-[#F7C83C] mb-4">
                 Assistance Info
               </h4>

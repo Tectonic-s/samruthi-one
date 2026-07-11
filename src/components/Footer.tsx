@@ -4,7 +4,7 @@ import { SITE_CONFIG } from '@/lib/data/content'
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-950/50 border-t border-white/20 text-gray-400 py-16 mt-auto">
+    <footer className="bg-black/80 border-t border-white/10 text-gray-400 py-16 mt-auto">
       <div className="w-full mx-auto px-4 lg:px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-12">
           {/* Company Intro */}

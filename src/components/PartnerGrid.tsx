@@ -54,7 +54,7 @@ function LogoChip({ name }: { name: string }) {
 export default function PartnerGrid() {
   return (
     <section className="py-16 lg:py-24">
-      <div className="w-full mx-auto px-4 lg:px-6 bg-gray-950/50 backdrop-blur-xl border border-white/20 rounded-[2rem] p-8 sm:p-12 shadow-2xl">
+      <div className="w-full mx-auto px-4 lg:px-6 py-8 sm:py-12">
         <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">Our Network</p>
         <h2 className="text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">Lender Partners</h2>
         <p className="text-gray-300 leading-relaxed mb-12 max-w-2xl">

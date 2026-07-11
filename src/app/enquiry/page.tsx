@@ -19,7 +19,7 @@ export default function EnquiryPage({ searchParams }: Props) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left panel contact info */}
-          <div className="lg:col-span-5 bg-gray-950/50 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/20 shadow-2xl space-y-8">
+          <div className="lg:col-span-5 bg-white/5 border border-white/10 p-8 sm:p-12 space-y-8">
             <div>
               <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">Get In Touch</p>
               <h1 className="text-3xl font-extrabold text-white tracking-tight leading-tight mb-4">
@@ -70,7 +70,7 @@ export default function EnquiryPage({ searchParams }: Props) {
           </div>
 
           {/* Right panel form glass card */}
-          <div className="lg:col-span-7 bg-gray-950/50 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/20 shadow-2xl">
+          <div className="lg:col-span-7 bg-white/5 border border-white/10 p-8 sm:p-12">
             <h2 className="text-2xl font-bold text-white mb-2 tracking-tight">Begin your enquiry</h2>
             <p className="text-xs text-gray-400 mb-8">Fields marked with asterisk (*) are required.</p>
             <EnquiryForm defaultFacility={searchParams.facility ?? ''} />

@@ -53,7 +53,7 @@ export default function Nav() {
   const isActive = (href: string) => pathname === href
 
   return (
-    <nav className={`sticky top-0 z-50 bg-gray-950/50 backdrop-blur-md border-b border-white/20 transition-all duration-300 ${mounted && scrolled ? 'shadow-lg' : ''}`}>
+    <nav className={`sticky top-0 z-50 bg-black/65 backdrop-blur-md border-b border-white/10 transition-all duration-300 ${mounted && scrolled ? 'shadow-lg shadow-black/40' : ''}`}>
       <div className="w-full mx-auto px-4 lg:px-6">
         <div className="relative flex items-center justify-between h-20 w-full">
 

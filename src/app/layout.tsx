@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             fill
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-gray-950/50 to-gray-950/70" />
+          <div className="absolute inset-0 bg-black/65" />
         </div>
         <Providers>
           <Shell>{children}</Shell>

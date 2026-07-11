@@ -25,17 +25,17 @@ export default function AboutPage() {
       <div className="w-full mx-auto px-4 lg:px-6">
         
         {/* Header Section */}
-        <div className="bg-gray-950/50 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/20 shadow-2xl mb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">About Us</p>
+        <div className="bg-white/5 border border-white/10 p-8 sm:p-12 mb-12">
+          <p className="text-xs font-semibold tracking-widest uppercase text-[#FFC107] mb-3">About Us</p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-            Built on <span className="text-[#F7C83C]">Trust</span>, Driven by Results
+            Built on <span className="text-[#FFC107]">Trust</span>, Driven by Results
           </h1>
         </div>
 
         {/* Main Content Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left panel badge block */}
-          <div className="lg:col-span-4 bg-gray-950/50 backdrop-blur-xl p-8 rounded-[2rem] border border-white/20 shadow-xl flex flex-col items-center justify-center min-h-[300px] text-center relative overflow-hidden group hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
+          <div className="lg:col-span-4 bg-white/5 border border-white/10 p-8 flex flex-col items-center justify-center min-h-[300px] text-center relative overflow-hidden group hover:border-[#FFC107]/40 transition-all duration-300">
             <span className="text-8xl font-black text-[#F7C83C]/5 absolute select-none pointer-events-none group-hover:text-[#F7C83C]/10 transition-colors duration-300">
               S1
             </span>
@@ -54,7 +54,7 @@ export default function AboutPage() {
           {/* Right main panel */}
           <div className="lg:col-span-8 space-y-10">
             {/* Context Paragraphs */}
-            <div className="bg-gray-950/50 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/20 shadow-xl space-y-6">
+            <div className="bg-white/5 border border-white/10 p-6 sm:p-8 space-y-6">
               <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                 Samruthi One was founded in {SITE_CONFIG.company.founded} with a clear mandate: to democratize financial consulting and credit procurement for growing businesses. We provide middle-market enterprises and MSMEs with high-quality capital structuring advisory that was historically reserved for much larger corporate firms.
               </p>
@@ -70,7 +70,7 @@ export default function AboutPage() {
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {values.map((v) => (
-                  <div key={v.title} className="bg-gray-950/50 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/20 shadow-lg relative group hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
+                  <div key={v.title} className="bg-white/5 border border-white/10 p-6 sm:p-8 relative group hover:border-[#FFC107]/40 transition-all duration-300">
                     <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-10 bg-[#F7C83C] rounded-r-md group-hover:h-12 transition-all duration-300" />
                     <h3 className="text-base font-bold text-white mb-2 pl-2">
                       {v.title}
@@ -92,7 +92,7 @@ export default function AboutPage() {
                 {team.map((m) => (
                   <div 
                     key={m.name} 
-                    className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-gray-950/50 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/20 shadow-lg hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out"
+                    className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-white/5 border border-white/10 p-6 sm:p-8 hover:border-[#FFC107]/40 transition-all duration-300"
                   >
                     <div className="w-12 h-12 rounded-full bg-[#F7C83C] text-gray-900 font-extrabold flex items-center justify-center text-sm shadow-md flex-shrink-0">
                       {m.initials}

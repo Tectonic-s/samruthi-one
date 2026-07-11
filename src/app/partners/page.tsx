@@ -12,12 +12,12 @@ export default function PartnersPage() {
       <div className="w-full mx-auto px-4 lg:px-6">
         
         {/* Banner glass element */}
-        <div className="bg-gray-950/50 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/20 shadow-2xl mb-8">
-          <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">Our Synergy</p>
+        <div className="bg-white/5 border border-white/10 p-8 sm:p-12 mb-8">
+          <p className="text-xs font-semibold tracking-widest uppercase text-[#FFC107] mb-3">Our Synergy</p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
-            Partners Who <span className="text-[#F7C83C]">Deliver</span>
+            Partners Who <span className="text-[#FFC107]">Deliver</span>
           </h1>
-          <p className="text-gray-300 mt-4 leading-relaxed max-w-2xl text-sm sm:text-base">
+          <p className="text-white/60 mt-4 leading-relaxed max-w-2xl text-sm sm:text-base">
             By partnering with India&apos;s leading banking institutions and Fintech lenders, we negotiate terms, speed up approvals, and secure credit lines where others cannot.
           </p>
         </div>
@@ -41,10 +41,7 @@ export default function PartnersPage() {
               desc: 'A loan decline is usually just a lender mismatch. We restructure the financial model and align it with a partner whose risk appetite matches your profile.' 
             },
           ].map((item) => (
-            <div 
-              key={item.title} 
-              className="bg-gray-950/50 backdrop-blur-xl p-8 rounded-[2rem] border border-white/20 shadow-xl hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(255,200,0,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out group"
-            >
+            <div key={item.title} className="bg-white/5 border border-white/10 p-8 hover:border-[#FFC107]/40 transition-all duration-300 group">
               <h3 className="text-lg font-bold text-white mb-3 group-hover:text-[#F7C83C] transition-colors">
                 {item.title}
               </h3>

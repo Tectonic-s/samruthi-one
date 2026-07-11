@@ -17,39 +17,43 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="min-h-[92vh] flex items-center relative overflow-hidden">
-        <div className="w-full px-4 lg:px-6 py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7 bg-gray-950/50 backdrop-blur-xl p-10 sm:p-14 rounded-[2rem] border border-white/20 shadow-2xl">
-              <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-4">
-                RBI Registered Fintech · Est. {SITE_CONFIG.company.founded}
-              </p>
-              <h1 className="text-4xl lg:text-6xl font-bold text-white tracking-tight leading-tight mb-6">
-                Financing<br /><span className="text-[#F7C83C]">Simplified</span><br />for Every Business
-              </h1>
-              <p className="text-lg text-gray-300 leading-relaxed mb-10 max-w-lg">
-                {SITE_CONFIG.company.name} connects growing businesses to 20+ banking and Fintech partners — sourcing the right credit at the best rates, faster.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/enquiry" className="pulse-glow inline-block bg-[#F7C83C] text-gray-900 font-bold px-8 py-4 text-sm tracking-wide hover:bg-[#D4A832] hover:-translate-y-1 transition-all duration-300 text-center shadow-lg rounded-xl">
-                  Get Started
-                </Link>
-                <Link href="/services" className="inline-flex items-center justify-center border border-white/20 text-white px-8 py-4 text-sm hover:border-[#F7C83C]/60 hover:-translate-y-1 transition-all duration-300 shadow-lg rounded-xl">
-                  Our Services &rarr;
-                </Link>
-              </div>
-              <p className="mt-8 text-xs text-gray-500 font-medium tracking-wide">CIN: {SITE_CONFIG.company.cin}</p>
-            </div>
+      <section className="min-h-[92vh] flex flex-col justify-center relative overflow-hidden">
 
-            <div className="lg:col-span-5 hidden md:grid grid-cols-2 gap-4 lg:gap-6 lg:pl-6">
-              {SITE_CONFIG.stats.map((stat) => (
-                <div key={stat.label} className="bg-gray-950/50 backdrop-blur-xl p-8 rounded-[2rem] border border-white/20 shadow-xl flex flex-col justify-center min-h-[160px] hover:border-[#F7C83C]/60 hover:shadow-[0_0_32px_2px_rgba(247,200,60,0.13)] hover:-translate-y-2 transition-all duration-500 ease-out">
-                  <div className="text-4xl font-bold text-[#F7C83C] tracking-tight mb-2">{stat.number}</div>
-                  <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{stat.label}</div>
-                </div>
-              ))}
+        <div className="relative z-10 w-full px-4 lg:px-6 pt-20 pb-12">
+
+          {/* Centered main copy */}
+          <div className="flex flex-col items-center text-center max-w-7xl mx-auto">
+            <p className="text-xs font-semibold tracking-widest uppercase text-[#FFC107] mb-4">
+              RBI Registered Fintech · Est. {SITE_CONFIG.company.founded}
+            </p>
+            <h1 className="text-4xl lg:text-6xl font-bold text-white tracking-tight leading-tight mb-6">
+              Financing <span className="text-[#FFC107]">Simplified</span>
+              <br className="hidden lg:block" /> for Every Business
+            </h1>
+            <p className="text-lg text-white/70 leading-relaxed mb-10 max-w-lg">
+              {SITE_CONFIG.company.name} connects growing businesses to 20+ banking and Fintech partners — sourcing the right credit at the best rates, faster.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/enquiry" className="pulse-glow inline-flex items-center justify-center bg-[#FFC107] text-black font-bold px-8 py-4 text-sm tracking-wide hover:bg-[#E6A800] transition-colors duration-200 whitespace-nowrap rounded-2xl">
+                Get Started
+              </Link>
+              <Link href="/services" className="inline-flex items-center justify-center gap-2 border border-white/30 text-white font-semibold px-8 py-4 text-sm hover:border-[#FFC107]/60 hover:text-[#FFC107] transition-all duration-200 whitespace-nowrap rounded-2xl">
+                Our Services →
+              </Link>
             </div>
+            <p className="mt-8 text-xs text-white/30 font-medium tracking-widest uppercase">CIN: {SITE_CONFIG.company.cin}</p>
           </div>
+
+          {/* Stats row — bottom of hero, full width, single horizontal line */}
+          <div className="mt-16 border-t border-white/10 pt-8 grid grid-cols-2 md:grid-cols-4">
+            {SITE_CONFIG.stats.map((stat, i) => (
+              <div key={stat.label} className={`flex flex-col items-center text-center py-6 ${i < 3 ? 'border-r border-white/10' : ''}`}>
+                <div className="text-3xl lg:text-4xl font-bold text-white tracking-tight mb-1 tabular-nums">{stat.number}</div>
+                <div className="text-xs font-semibold text-white/40 uppercase tracking-wider">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
@@ -62,7 +66,7 @@ export default function HomePage() {
                 <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">What We Offer</p>
                 <h2 className="text-3xl lg:text-4xl font-bold text-white tracking-tight">Credit Solutions<br />for Every Stage</h2>
               </div>
-              <Link href="/services" className="self-start sm:self-auto bg-gray-950/50 backdrop-blur-xl border border-white/20 rounded-xl px-6 py-3 text-xs font-semibold tracking-widest uppercase text-[#F7C83C] whitespace-nowrap shadow-xl hover:border-[#F7C83C]/40 transition-all">
+              <Link href="/services" className="self-start sm:self-auto border border-white/20 rounded-xl px-6 py-3 text-xs font-semibold tracking-widest uppercase text-[#FFC107] whitespace-nowrap hover:border-[#FFC107]/40 transition-all">
                 View All Services
               </Link>
             </div>
@@ -100,7 +104,7 @@ export default function HomePage() {
       {/* CTA */}
       <section className="py-20 relative z-10 px-4 lg:px-6">
         <FadeUp>
-          <div className="max-w-[1400px] mx-auto text-center bg-gray-900/50 backdrop-blur-xl border border-white/20 rounded-[2rem] p-10 sm:p-14 shadow-2xl">
+          <div className="max-w-[1400px] mx-auto text-center border border-white/10 p-10 sm:p-14">
             <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">Start Today</p>
             <h2 className="text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">Ready to access the right credit?</h2>
             <p className="text-gray-300 mb-10 max-w-xl mx-auto leading-relaxed">
