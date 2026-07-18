@@ -1,12 +1,22 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import Image from 'next/image'
-import bgImage from '../../public/logos/bg.jpg'
+import { Plus_Jakarta_Sans, Inter } from 'next/font/google'
 import './globals.css'
 import Providers from '@/components/Providers'
 import Shell from '@/components/Shell'
 
-const inter = Inter({ subsets: ['latin'], weight: ['400', '600', '700'] })
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-display',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-body',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Samruthi One — Financing Simplified',
@@ -22,21 +32,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} text-white antialiased min-h-screen flex flex-col relative`}>
-        {/* Fixed Background — public site only */}
-        <div className="fixed inset-0 z-[-1]">
-          <Image
-            src={bgImage}
-            alt="Samruthi One Corporate Background"
-            placeholder="blur"
-            quality={90}
-            priority
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-black/65" />
-        </div>
+    <html lang="en" className={`${plusJakarta.variable} ${inter.variable}`}>
+      <body className="font-body min-h-screen flex flex-col bg-white">
         <Providers>
           <Shell>{children}</Shell>
         </Providers>
