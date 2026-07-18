@@ -2,7 +2,6 @@
 import { usePathname } from 'next/navigation'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import PageLoader from '@/components/PageLoader'
 
 export default function Shell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -12,9 +11,10 @@ export default function Shell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <PageLoader />
       <Nav />
-      <main key={pathname} className="flex-grow flex flex-col page-enter">{children}</main>
+      <main key={pathname} className="flex-grow flex flex-col">
+        {children}
+      </main>
       <Footer />
     </>
   )

@@ -2,80 +2,58 @@ import type { Metadata } from 'next'
 import EnquiryForm from '@/components/EnquiryForm'
 import { SITE_CONFIG } from '@/lib/data/content'
 
-export const metadata: Metadata = { 
+export const metadata: Metadata = {
   title: 'Enquiry — Samruthi One',
   description: 'Submit your financing requirement and a relationship manager will contact you within 2 business hours.'
 }
 
-interface Props { 
-  searchParams: { facility?: string } 
+interface Props {
+  searchParams: { facility?: string }
+}
+
+const MUTED = 'rgba(10,10,10,.62)'
+const FAINT = 'rgba(10,10,10,.42)'
+
+function ContactRow({ label, value, sub }: { label: string; value: string; sub: string }) {
+  return (
+    <div>
+      <p className="text-[11px] font-semibold tracking-[.12em] uppercase mb-[5px]" style={{ color: FAINT }}>{label}</p>
+      <p className="text-[16px] font-semibold m-0">{value}</p>
+      <p className="text-[13px] mt-[3px] m-0" style={{ color: FAINT }}>{sub}</p>
+    </div>
+  )
 }
 
 export default function EnquiryPage({ searchParams }: Props) {
   return (
-    <div className="py-12 lg:py-20 relative z-10">
-      <div className="w-full mx-auto px-4 lg:px-6">
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Left panel contact info */}
-          <div className="lg:col-span-5 bg-white/5 border border-white/10 p-8 sm:p-12 space-y-8">
-            <div>
-              <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">Get In Touch</p>
-              <h1 className="text-3xl font-extrabold text-white tracking-tight leading-tight mb-4">
-                Let&apos;s Find the Right <span className="text-[#F7C83C]">Capital Structure</span>
-              </h1>
-              <p className="text-sm text-gray-300 leading-relaxed">
-                Fill in the details regarding your commercial financing requirement and a specialized advisor will contact you within 2 business hours.
-              </p>
-            </div>
+    <div className="page-enter max-w-[1200px] mx-auto px-5 sm:px-8 pt-20 pb-24">
+      <div className="grid grid-cols-1 min-[901px]:grid-cols-[5fr_7fr] gap-14 items-start">
 
-            <div className="h-px bg-white/10" />
-
-            <div className="space-y-6">
-              <div>
-                <p className="text-[0.65rem] font-bold tracking-widest uppercase text-gray-500 mb-1.5">Phone</p>
-                <p className="text-base font-bold text-white">{SITE_CONFIG.company.phone}</p>
-                <p className="text-xs text-gray-400 mt-0.5">{SITE_CONFIG.company.hours}</p>
-              </div>
-
-              <div>
-                <p className="text-[0.65rem] font-bold tracking-widest uppercase text-gray-500 mb-1.5">Email</p>
-                <p className="text-base font-bold text-white">{SITE_CONFIG.company.email}</p>
-                <p className="text-xs text-gray-400 mt-0.5">Prompt response within 2 hours</p>
-              </div>
-
-              <div>
-                <p className="text-[0.65rem] font-bold tracking-widest uppercase text-gray-500 mb-1.5">Chennai HQ</p>
-                <p className="text-base font-bold text-white">
-                  {SITE_CONFIG.company.address.area1}, {SITE_CONFIG.company.address.city1}
-                </p>
-                <p className="text-xs text-gray-400 mt-0.5">Pincode: {SITE_CONFIG.company.address.pincode1}</p>
-              </div>
-
-              <div>
-                <p className="text-[0.65rem] font-bold tracking-widest uppercase text-gray-500 mb-1.5">Coimbatore Branch</p>
-                <p className="text-base font-bold text-white">
-                  {SITE_CONFIG.company.address.area2}, {SITE_CONFIG.company.address.city2}
-                </p>
-                <p className="text-xs text-gray-400 mt-0.5">Pincode: {SITE_CONFIG.company.address.pincode2}</p>
-              </div>
-            </div>
-
-            <div className="h-px bg-white/10" />
-
-            <p className="text-[0.7rem] text-[#F7C83C] font-semibold tracking-wider">
-              CIN: {SITE_CONFIG.company.cin}
-            </p>
+        {/* Left — contact info */}
+        <div>
+          <p className="text-[12px] font-semibold tracking-[.12em] uppercase mb-4" style={{ color: '#E6B400' }}>
+            Get In Touch
+          </p>
+          <h1 className="font-heading font-extrabold text-[34px] min-[901px]:text-[42px] leading-[1.1] mb-[18px]" style={{ letterSpacing: '-.025em' }}>
+            Let&apos;s Find the Right <span className="hl-mark">Capital Structure</span>
+          </h1>
+          <p className="text-[15px] leading-[1.7] mb-10" style={{ color: MUTED }}>
+            Fill in the details of your financing requirement and a specialized advisor will contact you within 2 business hours.
+          </p>
+          <div className="h-px mb-9" style={{ background: 'rgba(10,10,10,.08)' }} />
+          <div className="flex flex-col gap-[26px]">
+            <ContactRow label="Phone" value={SITE_CONFIG.company.phone} sub={SITE_CONFIG.company.hours} />
+            <ContactRow label="Email" value={SITE_CONFIG.company.email} sub="Prompt response within 2 hours" />
+            <ContactRow label="Chennai HQ" value={`${SITE_CONFIG.company.address.area1}, ${SITE_CONFIG.company.address.city1}`} sub={`Pincode: ${SITE_CONFIG.company.address.pincode1}`} />
+            <ContactRow label="Coimbatore Branch" value={`${SITE_CONFIG.company.address.area2}, ${SITE_CONFIG.company.address.city2}`} sub={`Pincode: ${SITE_CONFIG.company.address.pincode2}`} />
           </div>
+        </div>
 
-          {/* Right panel form glass card */}
-          <div className="lg:col-span-7 bg-white/5 border border-white/10 p-8 sm:p-12">
-            <h2 className="text-2xl font-bold text-white mb-2 tracking-tight">Begin your enquiry</h2>
-            <p className="text-xs text-gray-400 mb-8">Fields marked with asterisk (*) are required.</p>
-            <EnquiryForm defaultFacility={searchParams.facility ?? ''} />
-          </div>
-
+        {/* Right — form card */}
+        <div className="rounded-[16px] p-7 sm:p-11 shadow-card" style={{ border: '1px solid rgba(10,10,10,.08)' }}>
+          <h2 className="font-heading font-bold text-[24px] mb-1.5">Begin your enquiry</h2>
+          <p className="text-[13px] mb-8" style={{ color: FAINT }}>Fields marked with asterisk (*) are required.</p>
+          <EnquiryForm defaultFacility={searchParams.facility ?? ''} />
         </div>
 
       </div>

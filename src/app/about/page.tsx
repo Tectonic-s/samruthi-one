@@ -1,19 +1,22 @@
 import type { Metadata } from 'next'
 import { SITE_CONFIG } from '@/lib/data/content'
 
-export const metadata: Metadata = { 
+export const metadata: Metadata = {
   title: 'About — Samruthi One',
   description: 'Learn about Samruthi One, our mission, core values, and our structured finance team.'
 }
 
-const values = [
+const HAIR = '1px solid rgba(10,10,10,.08)'
+const MUTED = 'rgba(10,10,10,.62)'
+
+const VALUES = [
   { title: 'Multi-bank Access', desc: 'Direct relationships with 20+ lenders to match your profile and get the best terms.' },
   { title: 'End-to-End Support', desc: 'From document preparation to final disbursement — we manage the entire process.' },
   { title: 'Sector Expertise', desc: 'Deep understanding of textiles, pharma, real estate, manufacturing, and trading.' },
   { title: 'Transparent Fees', desc: 'Success-based only. Fee disclosed upfront before engagement. No hidden charges.' },
 ]
 
-const team = [
+const TEAM = [
   { initials: 'SK', name: 'S. Krishnamurthy', role: 'Founder & Managing Director', exp: '18 years in banking and credit' },
   { initials: 'PR', name: 'P. Raghunathan', role: 'Head — Structured Finance', exp: 'Ex-ICICI Bank · 14 years' },
   { initials: 'AM', name: 'A. Meenakshi', role: 'Head — Client Relations', exp: 'MSME specialist · 10 years' },
@@ -21,95 +24,76 @@ const team = [
 
 export default function AboutPage() {
   return (
-    <div className="py-12 lg:py-20 relative z-10">
-      <div className="w-full mx-auto px-4 lg:px-6">
-        
-        {/* Header Section */}
-        <div className="bg-white/5 border border-white/10 p-8 sm:p-12 mb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-[#FFC107] mb-3">About Us</p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-            Built on <span className="text-[#FFC107]">Trust</span>, Driven by Results
-          </h1>
+    <div className="page-enter max-w-[1200px] mx-auto px-5 sm:px-8 pt-20 pb-24">
+      {/* Header */}
+      <div className="pb-11 mb-14" style={{ borderBottom: HAIR }}>
+        <p className="text-[12px] font-semibold tracking-[.12em] uppercase mb-4" style={{ color: '#E6B400' }}>
+          About Us
+        </p>
+        <h1 className="font-heading font-extrabold text-[38px] min-[901px]:text-[56px] m-0" style={{ letterSpacing: '-.028em' }}>
+          Built on <span className="hl-mark">Trust</span>, Driven by Results
+        </h1>
+      </div>
+
+      <div className="grid grid-cols-1 min-[901px]:grid-cols-[1fr_2fr] gap-12 items-start">
+        {/* Stat card */}
+        <div className="rounded-[16px] text-center px-9 py-12" style={{ background: '#F5F5F3' }}>
+          <p className="font-heading font-extrabold text-[64px] mb-1.5 m-0 leading-none">3+</p>
+          <p className="text-[11px] font-semibold tracking-[.12em] uppercase mb-6 mt-2" style={{ color: '#E6B400' }}>
+            Years of Excellence
+          </p>
+          <div className="h-px w-24 mx-auto mb-6" style={{ background: 'rgba(10,10,10,.1)' }} />
+          <p className="text-[14px] leading-[1.7] m-0" style={{ color: MUTED }}>
+            Structured financing solutions built specifically for MSMEs and growing corporate entities across South India.
+          </p>
         </div>
 
-        {/* Main Content Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left panel badge block */}
-          <div className="lg:col-span-4 bg-white/5 border border-white/10 p-8 flex flex-col items-center justify-center min-h-[300px] text-center relative overflow-hidden group hover:border-[#FFC107]/40 transition-all duration-300">
-            <span className="text-8xl font-black text-[#F7C83C]/5 absolute select-none pointer-events-none group-hover:text-[#F7C83C]/10 transition-colors duration-300">
-              S1
-            </span>
-            <div className="relative z-10">
-              <p className="text-6xl font-extrabold text-white mb-2">3+</p>
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-                Years of Excellence
-              </p>
-              <div className="h-px bg-white/10 w-24 my-6 mx-auto" />
-              <p className="text-sm text-gray-300 leading-relaxed px-4">
-                Structured financing solutions built specifically for MSMEs and growing corporate entities across South India.
-              </p>
-            </div>
+        {/* Body */}
+        <div>
+          <p className="text-[16px] leading-[1.75] mb-[22px]" style={{ color: MUTED }}>
+            Samruthi One was founded in {SITE_CONFIG.company.founded} with a clear mandate: to democratize financial consulting and credit procurement for growing businesses. We provide middle-market enterprises and MSMEs with high-quality capital structuring advisory that was historically reserved for much larger corporate firms.
+          </p>
+          <p className="text-[16px] leading-[1.75] mb-12" style={{ color: MUTED }}>
+            We manage the entire financing pipeline — mapping multi-lender credit criteria, formulating credit narratives, optimizing interest spreads, and coordinating legal and operational diligence to facilitate faster closures. Our success-fee policy ensures that our goals align exactly with yours.
+          </p>
+
+          <h2 className="text-[12px] font-semibold tracking-[.12em] uppercase mb-6" style={{ color: '#E6B400' }}>
+            Our Core Strengths
+          </h2>
+          <div className="grid grid-cols-1 min-[901px]:grid-cols-2 gap-5 mb-14">
+            {VALUES.map((v) => (
+              <div
+                key={v.title}
+                className="rounded-[16px] p-[26px] hover:-translate-y-0.5 hover:shadow-card-hover transition-all duration-300"
+                style={{ border: HAIR }}
+              >
+                <h3 className="font-heading font-bold text-[16px] mb-2">{v.title}</h3>
+                <p className="text-[14px] leading-[1.6] m-0" style={{ color: MUTED }}>{v.desc}</p>
+              </div>
+            ))}
           </div>
 
-          {/* Right main panel */}
-          <div className="lg:col-span-8 space-y-10">
-            {/* Context Paragraphs */}
-            <div className="bg-white/5 border border-white/10 p-6 sm:p-8 space-y-6">
-              <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-                Samruthi One was founded in {SITE_CONFIG.company.founded} with a clear mandate: to democratize financial consulting and credit procurement for growing businesses. We provide middle-market enterprises and MSMEs with high-quality capital structuring advisory that was historically reserved for much larger corporate firms.
-              </p>
-              <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-                We manage the entire financing pipeline—mapping multi-lender credit criteria, formulating credit narratives, optimizing interest spreads, and coordinating legal/operational diligence to facilitate faster closures. Our success-fee policy ensures that our goals align exactly with yours.
-              </p>
-            </div>
-
-            {/* Core Values */}
-            <div>
-              <h2 className="text-xs font-bold tracking-widest uppercase text-gray-400 mb-6 px-2">
-                Our Core Strengths
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {values.map((v) => (
-                  <div key={v.title} className="bg-white/5 border border-white/10 p-6 sm:p-8 relative group hover:border-[#FFC107]/40 transition-all duration-300">
-                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-10 bg-[#F7C83C] rounded-r-md group-hover:h-12 transition-all duration-300" />
-                    <h3 className="text-base font-bold text-white mb-2 pl-2">
-                      {v.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-gray-400 leading-relaxed pl-2">
-                      {v.desc}
-                    </p>
-                  </div>
-                ))}
+          <h2 className="text-[12px] font-semibold tracking-[.12em] uppercase mb-2" style={{ color: '#E6B400' }}>
+            Leadership Team
+          </h2>
+          <div style={{ borderTop: HAIR }}>
+            {TEAM.map((m) => (
+              <div key={m.name} className="flex items-center gap-5 py-6" style={{ borderBottom: HAIR }}>
+                <span
+                  className="w-12 h-12 rounded-full font-heading font-bold text-[14px] flex items-center justify-center flex-none"
+                  style={{ background: 'rgba(247,200,60,.2)' }}
+                >
+                  {m.initials}
+                </span>
+                <div>
+                  <h4 className="font-heading font-bold text-[16px] m-0">{m.name}</h4>
+                  <p className="text-[13px] font-medium mt-[3px] mb-[2px]" style={{ color: '#E6B400' }}>{m.role}</p>
+                  <p className="text-[13px] m-0" style={{ color: 'rgba(10,10,10,.42)' }}>{m.exp}</p>
+                </div>
               </div>
-            </div>
-
-            {/* Team Block */}
-            <div>
-              <h2 className="text-xs font-bold tracking-widest uppercase text-gray-400 mb-6 px-2">
-                Leadership Team
-              </h2>
-              <div className="space-y-4">
-                {team.map((m) => (
-                  <div 
-                    key={m.name} 
-                    className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-white/5 border border-white/10 p-6 sm:p-8 hover:border-[#FFC107]/40 transition-all duration-300"
-                  >
-                    <div className="w-12 h-12 rounded-full bg-[#F7C83C] text-gray-900 font-extrabold flex items-center justify-center text-sm shadow-md flex-shrink-0">
-                      {m.initials}
-                    </div>
-                    <div>
-                      <h4 className="text-base font-bold text-white">{m.name}</h4>
-                      <p className="text-xs font-semibold text-[#F7C83C] mt-0.5">{m.role}</p>
-                      <p className="text-xs text-gray-400 mt-1">{m.exp}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
+            ))}
           </div>
         </div>
-
       </div>
     </div>
   )

@@ -1,150 +1,105 @@
 'use client'
 import Link from 'next/link'
-import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
+import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import Logo from './Logo'
 
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
   { href: '/partners', label: 'Partners' },
   { href: '/about', label: 'About' },
-  { href: '/enquiry', label: 'Contact' },
 ]
 
 export default function Nav() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [mounted, setMounted] = useState(false)
-  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 })
-  const [indicatorReady, setIndicatorReady] = useState(false)
-  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([])
-  const navRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setMounted(true)
-    let ticking = false
-    const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          setScrolled(window.scrollY > 10)
-          ticking = false
-        })
-        ticking = true
-      }
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    setMenuOpen(false)
+  }, [pathname])
 
-  useEffect(() => {
-    const activeIndex = navLinks.findIndex(l => l.href === pathname)
-    const activeEl = linkRefs.current[activeIndex]
-    const navEl = navRef.current
-    if (activeEl && navEl) {
-      const navRect = navEl.getBoundingClientRect()
-      const linkRect = activeEl.getBoundingClientRect()
-      setIndicatorStyle({ left: linkRect.left - navRect.left, width: linkRect.width })
-      requestAnimationFrame(() => setIndicatorReady(true))
-    }
-  }, [pathname, mounted])
-
-  const isActive = (href: string) => pathname === href
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   return (
-    <nav className={`sticky top-0 z-50 bg-black/65 backdrop-blur-md border-b border-white/10 transition-all duration-300 ${mounted && scrolled ? 'shadow-lg shadow-black/40' : ''}`}>
-      <div className="w-full mx-auto px-4 lg:px-6">
-        <div className="relative flex items-center justify-between h-20 w-full">
+    <nav
+      className="sticky top-0 z-50"
+      style={{
+        background: 'rgba(247,200,60,.94)',
+        backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid rgba(10,10,10,.12)',
+      }}
+    >
+      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 h-[76px] flex items-center justify-between">
+        <Link href="/" className="flex items-center select-none">
+          <Image
+            src="/assets/logos/Logo.png"
+            alt="Samruthi One"
+            width={200}
+            height={200}
+            priority
+            style={{ height: 28, width: 'auto', objectFit: 'contain', filter: 'brightness(0)' }}
+          />
+        </Link>
 
-          {/* Logo anchor — PageLoader measures this to know where to fly the logo */}
-          <div id="nav-logo-anchor" style={{ animationDelay: '2.0s' }} className="nav-logo-enter">
-            <Logo />
-          </div>
-
-          {/* Desktop links */}
-          <div ref={navRef} className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-            {navLinks.map((link, i) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                ref={el => { linkRefs.current[i] = el }}
-                aria-current={isActive(link.href) ? 'page' : undefined}
-                style={{ animationDelay: `${2.1 + i * 0.07}s` }}
-                className={`nav-link-enter text-sm font-bold py-1 px-3 transition-colors duration-200 ${
-                  isActive(link.href) ? 'text-[#F7C83C]' : 'text-white hover:text-white/80'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            {mounted && indicatorStyle.width > 0 && (
-              <span
-                className="absolute bottom-0 h-[2px] bg-[#F7C83C] rounded-full"
-                style={{
-                  left: indicatorStyle.left,
-                  width: indicatorStyle.width,
-                  transition: indicatorReady ? 'left 350ms cubic-bezier(0.4,0,0.2,1), width 350ms cubic-bezier(0.4,0,0.2,1)' : 'none',
-                }}
-              />
-            )}
-          </div>
-
-          {/* CTA */}
-          <div className="hidden md:block" style={{ animationDelay: '2.3s' }}>
+        {/* Desktop links */}
+        <div className="hidden min-[901px]:flex items-center gap-8 text-[14px] font-medium">
+          {navLinks.map((link) => (
             <Link
-              href="/enquiry"
-              className="nav-link-enter bg-white/10 text-white border border-white/20 font-semibold px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider hover:bg-white/20 transition-colors"
+              key={link.href}
+              href={link.href}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+              className="py-1 transition-colors hover:text-ink"
+              style={{
+                color: isActive(link.href) ? '#0A0A0A' : 'rgba(10,10,10,.62)',
+                boxShadow: isActive(link.href) ? 'inset 0 -2px 0 #F7C83C' : 'none',
+              }}
             >
-              Enquire Now
+              {link.label}
             </Link>
-          </div>
+          ))}
+        </div>
 
-          {/* Mobile hamburger */}
+        <div className="flex items-center gap-2.5">
+          <Link
+            href="/enquiry"
+            className="bg-ink text-white text-[13px] font-semibold px-6 py-[11px] rounded-full hover:bg-black transition-colors"
+          >
+            Let&apos;s Talk
+          </Link>
+          {/* Mobile burger */}
           <button
-            className="md:hidden p-2 text-white focus:outline-none"
+            className="hidden max-[900px]:flex p-2 text-[22px] leading-none bg-transparent border-none cursor-pointer"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle navigation menu"
+            aria-label="Toggle menu"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
           >
-            {menuOpen ? (
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
+            {menuOpen ? '✕' : '☰'}
           </button>
         </div>
-
-        {/* Mobile menu */}
-        {menuOpen && (
-          <div id="mobile-menu" className="md:hidden border-t border-white/20 py-3 bg-gray-950/50 backdrop-blur-md">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className={`block px-2 py-3 text-sm font-bold border-b border-white/20 ${
-                  isActive(link.href) ? 'text-[#F7C83C] border-l-4 border-l-[#F7C83C] pl-3' : 'text-white/60'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              href="/enquiry"
-              onClick={() => setMenuOpen(false)}
-              className="block mt-4 mx-2 bg-[#F7C83C] text-center rounded-xl text-gray-900 font-semibold px-6 py-3 text-sm hover:bg-[#D4A832] transition-colors"
-            >
-              Enquire Now
-            </Link>
-          </div>
-        )}
       </div>
+
+      {/* Mobile dropdown */}
+      {menuOpen && (
+        <div
+          id="mobile-menu"
+          className="px-5 sm:px-8 pt-2 pb-5 flex flex-col gap-1 min-[901px]:hidden"
+          style={{ borderTop: '1px solid rgba(10,10,10,.08)' }}
+        >
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-[15px] font-medium py-3 px-1"
+              style={{ color: isActive(link.href) ? '#0A0A0A' : 'rgba(10,10,10,.62)' }}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </nav>
   )
 }

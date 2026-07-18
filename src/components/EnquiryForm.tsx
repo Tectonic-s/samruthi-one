@@ -76,9 +76,9 @@ export default function EnquiryForm({ defaultFacility = '' }: { defaultFacility?
     }
   }
 
-  const inputClass = "w-full bg-gray-900/50 border border-white/20 text-white rounded-xl focus:border-[#F7C83C] focus:ring-1 focus:ring-[#F7C83C] focus:bg-gray-950 px-4 py-3 text-sm transition-all outline-none placeholder-gray-500 appearance-none"
-  const labelClass = "block text-[0.68rem] font-semibold tracking-widest uppercase text-gray-400 mb-2"
-  const errClass = "text-red-400 text-xs mt-1.5 font-medium"
+  const inputClass = "w-full bg-white border border-line text-ink rounded-xl focus:border-ink focus:ring-1 focus:ring-ink px-4 py-3 text-sm transition-all outline-none placeholder:text-ink-faint appearance-none"
+  const labelClass = "block text-[0.68rem] font-semibold tracking-widest uppercase text-ink-faint mb-2"
+  const errClass = "text-red-600 text-xs mt-1.5 font-medium"
 
   return (
     <form onSubmit={submit} noValidate className="space-y-6">
@@ -129,12 +129,12 @@ export default function EnquiryForm({ defaultFacility = '' }: { defaultFacility?
               value={form.businessType}
               onChange={(e) => set('businessType', e.target.value)}
             >
-              <option value="" className="bg-gray-950">Select</option>
+              <option value="">Select</option>
               {businessTypes.map((t) => (
-                <option key={t} value={t} className="bg-gray-950">{t}</option>
+                <option key={t} value={t}>{t}</option>
               ))}
             </select>
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-ink-faint">
               ▼
             </div>
           </div>
@@ -152,12 +152,12 @@ export default function EnquiryForm({ defaultFacility = '' }: { defaultFacility?
               value={form.facility}
               onChange={(e) => set('facility', e.target.value)}
             >
-              <option value="" className="bg-gray-950">Select</option>
+              <option value="">Select</option>
               {facilities.map((f) => (
-                <option key={f} value={f} className="bg-gray-950">{f}</option>
+                <option key={f} value={f}>{f}</option>
               ))}
             </select>
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-ink-faint">
               ▼
             </div>
           </div>
@@ -172,12 +172,12 @@ export default function EnquiryForm({ defaultFacility = '' }: { defaultFacility?
               value={form.loanAmount}
               onChange={(e) => set('loanAmount', e.target.value)}
             >
-              <option value="" className="bg-gray-950">Select range</option>
+              <option value="">Select range</option>
               {ranges.map((r) => (
-                <option key={r} value={r} className="bg-gray-950">{r}</option>
+                <option key={r} value={r}>{r}</option>
               ))}
             </select>
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-ink-faint">
               ▼
             </div>
           </div>
@@ -193,12 +193,12 @@ export default function EnquiryForm({ defaultFacility = '' }: { defaultFacility?
             value={form.turnover}
             onChange={(e) => set('turnover', e.target.value)}
           >
-            <option value="" className="bg-gray-950">Select range</option>
+            <option value="">Select range</option>
             {ranges.map((r) => (
-              <option key={r} value={r} className="bg-gray-950">{r}</option>
+              <option key={r} value={r}>{r}</option>
             ))}
           </select>
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-ink-faint">
             ▼
           </div>
         </div>
@@ -221,18 +221,18 @@ export default function EnquiryForm({ defaultFacility = '' }: { defaultFacility?
             type="checkbox"
             checked={form.consent}
             onChange={(e) => set('consent', e.target.checked)}
-            className="mt-1.5 accent-[#F7C83C] h-4 w-4 rounded border-white/20 bg-gray-900 text-[#F7C83C] focus:ring-0 focus:ring-offset-0"
+            className="mt-1.5 accent-[#F7C83C] h-4 w-4 rounded border-line bg-white text-[#F7C83C] focus:ring-0 focus:ring-offset-0"
           />
-          <span className="text-xs text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
-            I agree to the <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[#F7C83C] font-semibold hover:underline">Privacy Policy</a> and{' '}
-            <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-[#F7C83C] font-semibold hover:underline">Terms</a> and consent to being contacted by Samruthi One.
+          <span className="text-xs text-ink-soft leading-relaxed group-hover:text-ink transition-colors">
+            I agree to the <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-ink font-semibold underline decoration-gold decoration-2 underline-offset-2 hover:decoration-gold-hover">Privacy Policy</a> and{' '}
+            <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-ink font-semibold underline decoration-gold decoration-2 underline-offset-2 hover:decoration-gold-hover">Terms</a> and consent to being contacted by Samruthi One.
           </span>
         </label>
         {errors.consent && <p className={errClass}>{errors.consent}</p>}
       </div>
 
       {errors.submit && (
-        <div className="bg-red-950/40 border border-red-500/20 text-red-400 p-4 rounded-xl text-sm font-medium">
+        <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-xl text-sm font-medium">
           {errors.submit}
         </div>
       )}
@@ -240,7 +240,7 @@ export default function EnquiryForm({ defaultFacility = '' }: { defaultFacility?
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-[#F7C83C] text-gray-900 font-bold py-4 rounded-xl hover:bg-[#D4A832] transition-colors tracking-widest text-xs uppercase shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-ink text-white font-semibold py-4 rounded-full hover:bg-black hover:shadow-pill transition-all duration-200 text-[14px] disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? 'Submitting...' : 'Submit Enquiry'}
       </button>
