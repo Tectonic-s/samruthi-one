@@ -17,6 +17,10 @@ const STATUS_COLORS: Record<string, { bg: string; color: string }> = {
 
 const STATUSES = ['New', 'Contacted', 'In Progress', 'Closed']
 
+// Never let a non-JSON response (500 with empty body, proxy error page,
+// dropped connection mid-reload) crash the dashboard.
+const safeJson = (r: Response) => r.json().catch(() => ({}))
+
 const inputStyle: React.CSSProperties = {
   padding: '7px 12px', background: '#fff', border: '1px solid rgba(10,10,10,.15)',
   borderRadius: 8, fontSize: '0.78rem', color: '#0A0A0A',
@@ -75,7 +79,7 @@ export default function AdminDashboard() {
     if (search) params.set('search', search)
     if (filterStatus) params.set('status', filterStatus)
     const res = await fetch(`/api/admin/leads?${params}`)
-    const data = await res.json()
+    const data = await safeJson(res)
     setLeads(data.leads ?? [])
     setTotal(data.total ?? 0)
     setTotalPages(data.totalPages ?? 1)
@@ -84,10 +88,10 @@ export default function AdminDashboard() {
 
   const fetchStats = useCallback(async () => {
     const [all, newL, inp, cls] = await Promise.all([
-      fetch('/api/admin/leads?page=1').then(r => r.json()),
-      fetch('/api/admin/leads?page=1&status=New').then(r => r.json()),
-      fetch('/api/admin/leads?page=1&status=In%20Progress').then(r => r.json()),
-      fetch('/api/admin/leads?page=1&status=Closed').then(r => r.json()),
+      fetch('/api/admin/leads?page=1').then(safeJson),
+      fetch('/api/admin/leads?page=1&status=New').then(safeJson),
+      fetch('/api/admin/leads?page=1&status=In%20Progress').then(safeJson),
+      fetch('/api/admin/leads?page=1&status=Closed').then(safeJson),
     ])
     setStats({ total: all.total ?? 0, new: newL.total ?? 0, inProgress: inp.total ?? 0, closed: cls.total ?? 0 })
   }, [])
@@ -134,7 +138,7 @@ export default function AdminDashboard() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, delete: true, passphrase }),
     })
-    const data = await res.json()
+    const data = await safeJson(res)
     if (!res.ok) {
       setDeleteError(data.error ?? 'Failed to delete')
       return
