@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     description: 'Multi-bank access. Structured solutions. Faster approvals.',
     type: 'website',
   },
+  appleWebApp: {
+    title: 'Samruthi One',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

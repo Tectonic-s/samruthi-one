@@ -4,22 +4,37 @@ import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import type { Lead } from '@/types'
 
-const STATUS_COLORS: Record<string, { bg: string; color: string; border: string }> = {
-  'New':         { bg: 'rgba(59,130,246,0.12)',  color: '#60a5fa', border: 'rgba(59,130,246,0.3)'  },
-  'Contacted':   { bg: 'rgba(251,191,36,0.12)',  color: '#F7C83C', border: 'rgba(251,191,36,0.3)'  },
-  'In Progress': { bg: 'rgba(167,139,250,0.12)', color: '#a78bfa', border: 'rgba(167,139,250,0.3)' },
-  'Closed':      { bg: 'rgba(52,211,153,0.12)',  color: '#34d399', border: 'rgba(52,211,153,0.3)'  },
+const HAIR = '1px solid rgba(10,10,10,.08)'
+const HAIR_SOFT = '1px solid rgba(10,10,10,.06)'
+const HEAD = 'Plus Jakarta Sans, sans-serif'
+
+const STATUS_COLORS: Record<string, { bg: string; color: string }> = {
+  'New':         { bg: 'rgba(59,130,246,.10)',  color: '#1d4ed8' },
+  'Contacted':   { bg: 'rgba(247,200,60,.25)',  color: '#7a5c00' },
+  'In Progress': { bg: 'rgba(167,139,250,.14)', color: '#5b21b6' },
+  'Closed':      { bg: 'rgba(52,211,153,.14)',  color: '#047857' },
 }
 
 const STATUSES = ['New', 'Contacted', 'In Progress', 'Closed']
 
+const inputStyle: React.CSSProperties = {
+  padding: '7px 12px', background: '#fff', border: '1px solid rgba(10,10,10,.15)',
+  borderRadius: 8, fontSize: '0.78rem', color: '#0A0A0A',
+}
+
+const yellowPill: React.CSSProperties = {
+  padding: '7px 16px', background: '#F7C83C', color: '#0A0A0A', border: 'none',
+  borderRadius: 999, fontSize: '0.72rem', fontWeight: 700, cursor: 'pointer',
+  letterSpacing: '0.08em', textTransform: 'uppercase',
+}
+
 function DeleteConfirm({ onConfirm, onCancel }: { onConfirm: (p: string) => void; onCancel: () => void }) {
   const [val, setVal] = useState('')
   return (
-    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div role="dialog" aria-modal="true" aria-labelledby="delete-title" style={{ background: '#111', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, padding: '2rem', width: 360 }}>
-        <p id="delete-title" style={{ color: '#fff', fontWeight: 700, marginBottom: 8 }}>Confirm Delete</p>
-        <p style={{ color: '#888', fontSize: '0.78rem', marginBottom: 16 }}>Enter the delete passphrase to permanently remove this lead.</p>
+    <div style={{ position: 'fixed', inset: 0, background: 'rgba(10,10,10,.45)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div role="dialog" aria-modal="true" aria-labelledby="delete-title" style={{ background: '#fff', border: HAIR, borderRadius: 16, padding: '2rem', width: 360, boxShadow: '0 24px 64px rgba(10,10,10,.18)' }}>
+        <p id="delete-title" style={{ color: '#0A0A0A', fontWeight: 700, fontFamily: HEAD, marginBottom: 8, marginTop: 0 }}>Confirm Delete</p>
+        <p style={{ color: 'rgba(10,10,10,.55)', fontSize: '0.78rem', marginBottom: 16, marginTop: 0 }}>Enter the delete passphrase to permanently remove this lead.</p>
         <input
           type="password"
           value={val}
@@ -27,11 +42,11 @@ function DeleteConfirm({ onConfirm, onCancel }: { onConfirm: (p: string) => void
           placeholder="Passphrase"
           autoFocus
           aria-label="Delete passphrase"
-          style={{ width: '100%', background: '#0a0a0a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 6, color: '#fff', padding: '8px 12px', fontSize: '0.85rem', outline: 'none', marginBottom: 16, boxSizing: 'border-box' }}
+          style={{ ...inputStyle, width: '100%', boxSizing: 'border-box', marginBottom: 16 }}
         />
         <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
-          <button onClick={onCancel} style={{ padding: '6px 16px', background: 'transparent', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 6, color: '#888', cursor: 'pointer', fontSize: '0.75rem' }}>Cancel</button>
-          <button onClick={() => val && onConfirm(val)} disabled={!val} style={{ padding: '6px 16px', background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 6, color: '#f87171', cursor: val ? 'pointer' : 'not-allowed', fontSize: '0.75rem', fontWeight: 600 }}>Delete</button>
+          <button onClick={onCancel} style={{ padding: '6px 16px', background: 'transparent', border: '1px solid rgba(10,10,10,.15)', borderRadius: 999, color: 'rgba(10,10,10,.62)', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 600 }}>Cancel</button>
+          <button onClick={() => val && onConfirm(val)} disabled={!val} style={{ padding: '6px 16px', background: '#DC2626', border: 'none', borderRadius: 999, color: '#fff', cursor: val ? 'pointer' : 'not-allowed', fontSize: '0.75rem', fontWeight: 700, opacity: val ? 1 : 0.6 }}>Delete</button>
         </div>
       </div>
     </div>
@@ -132,10 +147,10 @@ export default function AdminDashboard() {
   }
 
   const statCards = [
-    { label: 'Total Leads', value: stats.total, accent: '#fff' },
-    { label: 'New', value: stats.new, accent: '#60a5fa' },
-    { label: 'In Progress', value: stats.inProgress, accent: '#a78bfa' },
-    { label: 'Closed', value: stats.closed, accent: '#34d399' },
+    { label: 'Total Leads', value: stats.total, filter: '' },
+    { label: 'New', value: stats.new, filter: 'New' },
+    { label: 'In Progress', value: stats.inProgress, filter: 'In Progress' },
+    { label: 'Closed', value: stats.closed, filter: 'Closed' },
   ]
 
   const grouped = leads.reduce<Record<string, Lead[]>>((acc, lead) => {
@@ -147,8 +162,8 @@ export default function AdminDashboard() {
 
   if (authStatus === 'loading' || authStatus === 'unauthenticated') {
     return (
-      <div style={{ minHeight: '100vh', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#F7C83C', fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase' }}>Loading...</div>
+      <div style={{ minHeight: '100vh', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ color: 'rgba(10,10,10,.45)', fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase' }}>Loading...</div>
       </div>
     )
   }
@@ -162,21 +177,21 @@ export default function AdminDashboard() {
         />
       )}
 
-      <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: 'var(--font-inter, sans-serif)', color: '#fff' }}>
+      <div style={{ minHeight: '100vh', background: '#fff', fontFamily: 'Inter, sans-serif', color: '#0A0A0A' }}>
 
         {/* Header */}
-        <header style={{ background: '#111', borderBottom: '1px solid rgba(255,255,255,0.06)', height: 58, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 28px', position: 'sticky', top: 0, zIndex: 50 }}>
+        <header style={{ background: 'rgba(247,200,60,.94)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(10,10,10,.12)', height: 58, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 28px', position: 'sticky', top: 0, zIndex: 50 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <svg width="26" height="26" viewBox="0 0 34 34" fill="none" aria-hidden="true"><path d="M4 4 H24 Q30 4 30 10 V30 Q20 30 12 22 Q4 14 4 4Z" fill="#fff" /><path d="M2 22 Q2 32 12 32 L12 25 Q7 25 7 20Z" fill="#F7C83C" /></svg>
-            <span style={{ color: '#fff', fontWeight: 700, fontSize: '0.95rem', letterSpacing: '-0.01em' }}>Samruthi One</span>
-            <span style={{ background: 'rgba(255,200,0,0.12)', color: '#F7C83C', fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', padding: '3px 8px', borderRadius: 4, border: '1px solid rgba(255,200,0,0.2)' }}>Portal</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logos/Logo.png" alt="Samruthi One" style={{ height: 24, width: 'auto', objectFit: 'contain', filter: 'brightness(0)' }} />
+            <span style={{ background: '#fff', color: '#0A0A0A', fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', padding: '3px 10px', borderRadius: 999, border: '1px solid rgba(10,10,10,.12)' }}>Portal</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <span style={{ color: '#555', fontSize: '0.75rem' }}>{session?.user?.email}</span>
+            <span style={{ color: 'rgba(10,10,10,.55)', fontSize: '0.75rem' }}>{session?.user?.email}</span>
             <button
               aria-label="Sign out"
               onClick={() => signOut({ callbackUrl: '/s1-portal/login' })}
-              style={{ color: '#888', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', background: 'none', border: '1px solid #222', padding: '5px 14px', borderRadius: 4, cursor: 'pointer' }}
+              style={{ color: '#0A0A0A', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', background: 'none', border: '1px solid rgba(10,10,10,.3)', padding: '5px 16px', borderRadius: 999, cursor: 'pointer' }}
             >
               Sign Out
             </button>
@@ -187,48 +202,44 @@ export default function AdminDashboard() {
 
           {/* Page title */}
           <div style={{ marginBottom: '1.5rem' }}>
-            <p style={{ fontSize: '0.65rem', color: '#F7C83C', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 4 }}>Dashboard</p>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em' }}>Enquiry Leads</h1>
+            <p style={{ fontSize: '0.65rem', color: '#E6B400', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 4, marginTop: 0 }}>Dashboard</p>
+            <h1 style={{ fontSize: '1.5rem', fontWeight: 800, fontFamily: HEAD, color: '#0A0A0A', letterSpacing: '-0.02em', margin: 0 }}>Enquiry Leads</h1>
           </div>
 
           {/* Stats */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', marginBottom: '1.5rem' }}>
             {statCards.map(s => (
-              <div key={s.label} style={{ background: '#111', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 12, padding: '1.25rem 1.5rem' }}>
-                <p style={{ fontSize: '0.62rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 8 }}>{s.label}</p>
-                <p style={{ fontSize: '2rem', fontWeight: 700, color: s.accent, lineHeight: 1 }}>{s.value}</p>
+              <div key={s.label} style={{ background: '#fff', border: HAIR, borderTop: filterStatus === s.filter && s.filter !== '' ? '3px solid #F7C83C' : HAIR, borderRadius: 12, padding: '1.25rem 1.5rem' }}>
+                <p style={{ fontSize: '0.62rem', color: 'rgba(10,10,10,.55)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 8, marginTop: 0 }}>{s.label}</p>
+                <p style={{ fontSize: '2.1rem', fontWeight: 800, fontFamily: HEAD, color: '#0A0A0A', lineHeight: 1, margin: 0 }}>{s.value}</p>
               </div>
             ))}
           </div>
 
           {/* Table card */}
-          <div style={{ background: '#111', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, overflow: 'hidden' }}>
+          <div style={{ background: '#fff', border: HAIR, borderRadius: 16, overflow: 'hidden' }}>
 
             {/* Toolbar */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.06)', flexWrap: 'wrap', gap: 12 }}>
-              <p style={{ fontSize: '0.75rem', color: '#555' }}>{total} leads</p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', borderBottom: HAIR, flexWrap: 'wrap', gap: 12 }}>
+              <p style={{ fontSize: '0.75rem', color: 'rgba(10,10,10,.45)', margin: 0 }}>{total} leads</p>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
                 <input
                   value={search}
                   onChange={e => { setSearch(e.target.value); setPage(1) }}
                   placeholder="Search name, phone, email, ref…"
                   aria-label="Search leads"
-                  style={{ padding: '7px 12px', background: '#0a0a0a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6, fontSize: '0.78rem', outline: 'none', color: '#fff', minWidth: 220 }}
+                  style={{ ...inputStyle, minWidth: 220 }}
                 />
                 <select
                   value={filterStatus}
                   onChange={e => { setFilterStatus(e.target.value); setPage(1) }}
                   aria-label="Filter by status"
-                  style={{ padding: '7px 12px', background: '#0a0a0a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6, fontSize: '0.78rem', outline: 'none', color: filterStatus ? '#F7C83C' : '#888' }}
+                  style={{ ...inputStyle, cursor: 'pointer', color: filterStatus ? '#0A0A0A' : 'rgba(10,10,10,.55)' }}
                 >
                   <option value="">All Statuses</option>
                   {STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
                 </select>
-                <button
-                  onClick={exportLeads}
-                  aria-label="Export leads to Excel"
-                  style={{ padding: '7px 16px', background: '#F7C83C', color: '#0a0a0a', border: 'none', borderRadius: 6, fontSize: '0.72rem', fontWeight: 700, cursor: 'pointer', letterSpacing: '0.08em', textTransform: 'uppercase' }}
-                >
+                <button onClick={exportLeads} aria-label="Export leads to Excel" style={yellowPill}>
                   ↓ Export
                 </button>
               </div>
@@ -236,41 +247,41 @@ export default function AdminDashboard() {
 
             {/* Table */}
             {loading ? (
-              <div style={{ padding: '4rem', textAlign: 'center', color: '#444', fontSize: '0.8rem' }}>Fetching leads…</div>
+              <div style={{ padding: '4rem', textAlign: 'center', color: 'rgba(10,10,10,.45)', fontSize: '0.8rem' }}>Fetching leads…</div>
             ) : leads.length === 0 ? (
-              <div style={{ padding: '4rem', textAlign: 'center', color: '#444', fontSize: '0.8rem' }}>No leads found.</div>
+              <div style={{ padding: '4rem', textAlign: 'center', color: 'rgba(10,10,10,.45)', fontSize: '0.8rem' }}>No leads found.</div>
             ) : (
               <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 {Object.entries(grouped).map(([month, monthLeads]) => (
-                  <div key={month} style={{ border: '1px solid rgba(255,255,255,0.06)', borderRadius: 12, overflow: 'hidden' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', background: 'rgba(255,200,0,0.04)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                      <span style={{ fontSize: '0.68rem', fontWeight: 700, color: '#F7C83C', letterSpacing: '0.12em', textTransform: 'uppercase' }}>{month}</span>
-                      <span style={{ fontSize: '0.65rem', color: '#555' }}>{monthLeads.length} {monthLeads.length === 1 ? 'lead' : 'leads'}</span>
+                  <div key={month} style={{ border: HAIR_SOFT, borderRadius: 12, overflow: 'hidden' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', background: 'rgba(247,200,60,.12)', borderBottom: HAIR_SOFT }}>
+                      <span style={{ fontSize: '0.68rem', fontWeight: 700, color: '#0A0A0A', letterSpacing: '0.12em', textTransform: 'uppercase' }}>{month}</span>
+                      <span style={{ fontSize: '0.65rem', color: 'rgba(10,10,10,.45)' }}>{monthLeads.length} {monthLeads.length === 1 ? 'lead' : 'leads'}</span>
                     </div>
                     <div style={{ overflowX: 'auto' }}>
                       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.78rem' }}>
                         <thead>
-                          <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                          <tr style={{ borderBottom: HAIR_SOFT }}>
                             {['Ref ID', 'Date', 'Name', 'Phone', 'Facility', 'Amount', 'Status', 'Actions'].map(h => (
-                              <th key={h} style={{ padding: '8px 16px', textAlign: 'left', fontWeight: 600, fontSize: '0.6rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#444', whiteSpace: 'nowrap' }}>{h}</th>
+                              <th key={h} style={{ padding: '8px 16px', textAlign: 'left', fontWeight: 600, fontSize: '0.62rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(10,10,10,.45)', whiteSpace: 'nowrap' }}>{h}</th>
                             ))}
                           </tr>
                         </thead>
                         <tbody>
                           {monthLeads.map((l) => {
-                            const sc = STATUS_COLORS[l.status] ?? { bg: 'rgba(255,255,255,0.05)', color: '#888', border: 'rgba(255,255,255,0.1)' }
+                            const sc = STATUS_COLORS[l.status] ?? { bg: 'rgba(10,10,10,.06)', color: 'rgba(10,10,10,.55)' }
                             const isOpen = expandedId === l.id
                             return (
                               <>
-                                <tr key={`row-${l.id}`} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', background: isOpen ? 'rgba(255,200,0,0.03)' : 'transparent' }}>
-                                  <td style={{ padding: '12px 16px', fontWeight: 600, color: '#F7C83C', whiteSpace: 'nowrap', fontFamily: 'monospace', fontSize: '0.72rem' }}>{l.referenceId}</td>
-                                  <td style={{ padding: '12px 16px', color: '#555', whiteSpace: 'nowrap' }}>{new Date(l.createdAt).toLocaleDateString('en-IN')}</td>
-                                  <td style={{ padding: '12px 16px', fontWeight: 500, color: '#ddd' }}>{l.name}</td>
-                                  <td style={{ padding: '12px 16px', color: '#888', whiteSpace: 'nowrap' }}>{l.phone}</td>
-                                  <td style={{ padding: '12px 16px', color: '#aaa' }}>{l.facility}</td>
-                                  <td style={{ padding: '12px 16px', color: '#aaa', whiteSpace: 'nowrap' }}>{l.loanAmount}</td>
+                                <tr key={`row-${l.id}`} style={{ borderBottom: HAIR_SOFT, background: isOpen ? 'rgba(247,200,60,.06)' : 'transparent' }}>
+                                  <td style={{ padding: '12px 16px', fontWeight: 600, color: '#A67C00', whiteSpace: 'nowrap', fontFamily: 'monospace', fontSize: '0.72rem' }}>{l.referenceId}</td>
+                                  <td style={{ padding: '12px 16px', color: 'rgba(10,10,10,.45)', whiteSpace: 'nowrap' }}>{new Date(l.createdAt).toLocaleDateString('en-IN')}</td>
+                                  <td style={{ padding: '12px 16px', fontWeight: 600, color: '#0A0A0A' }}>{l.name}</td>
+                                  <td style={{ padding: '12px 16px', color: 'rgba(10,10,10,.62)', whiteSpace: 'nowrap' }}>{l.phone}</td>
+                                  <td style={{ padding: '12px 16px', color: 'rgba(10,10,10,.62)' }}>{l.facility}</td>
+                                  <td style={{ padding: '12px 16px', color: 'rgba(10,10,10,.62)', whiteSpace: 'nowrap' }}>{l.loanAmount}</td>
                                   <td style={{ padding: '12px 16px' }}>
-                                    <span style={{ background: sc.bg, color: sc.color, border: `1px solid ${sc.border}`, padding: '3px 10px', borderRadius: 9999, fontSize: '0.65rem', fontWeight: 600, whiteSpace: 'nowrap' }}>{l.status}</span>
+                                    <span style={{ background: sc.bg, color: sc.color, padding: '3px 10px', borderRadius: 999, fontSize: '0.65rem', fontWeight: 600, whiteSpace: 'nowrap' }}>{l.status}</span>
                                   </td>
                                   <td style={{ padding: '12px 16px' }}>
                                     <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
@@ -278,7 +289,7 @@ export default function AdminDashboard() {
                                         value={l.status}
                                         onChange={e => updateStatus(l.id, e.target.value)}
                                         aria-label={`Change status for ${l.referenceId}`}
-                                        style={{ fontSize: '0.7rem', padding: '4px 8px', background: '#0a0a0a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 4, cursor: 'pointer', outline: 'none', color: '#aaa' }}
+                                        style={{ fontSize: '0.7rem', padding: '4px 8px', background: '#fff', border: '1px solid rgba(10,10,10,.15)', borderRadius: 8, cursor: 'pointer', color: '#0A0A0A' }}
                                       >
                                         {STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
                                       </select>
@@ -286,7 +297,7 @@ export default function AdminDashboard() {
                                         onClick={() => toggleExpand(l)}
                                         aria-expanded={isOpen}
                                         aria-label={isOpen ? 'Collapse lead details' : 'Expand lead details'}
-                                        style={{ fontSize: '0.65rem', padding: '4px 10px', background: isOpen ? 'rgba(255,200,0,0.12)' : 'rgba(255,255,255,0.05)', border: `1px solid ${isOpen ? 'rgba(255,200,0,0.3)' : 'rgba(255,255,255,0.08)'}`, borderRadius: 4, cursor: 'pointer', color: isOpen ? '#F7C83C' : '#888', whiteSpace: 'nowrap' }}
+                                        style={{ fontSize: '0.65rem', padding: '4px 12px', background: isOpen ? 'rgba(247,200,60,.25)' : '#fff', border: '1px solid rgba(10,10,10,.15)', borderRadius: 999, cursor: 'pointer', color: '#0A0A0A', fontWeight: 600, whiteSpace: 'nowrap' }}
                                       >
                                         {isOpen ? '▲ Close' : '▼ Details'}
                                       </button>
@@ -294,11 +305,11 @@ export default function AdminDashboard() {
                                   </td>
                                 </tr>
                                 {isOpen && (
-                                  <tr key={`expanded-${l.id}`} style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,200,0,0.02)' }}>
+                                  <tr key={`expanded-${l.id}`} style={{ borderBottom: HAIR_SOFT, background: 'rgba(247,200,60,.04)' }}>
                                     <td colSpan={8} style={{ padding: '0 16px 16px' }}>
                                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', paddingTop: 16 }}>
-                                        <div style={{ background: '#0a0a0a', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, padding: '1rem' }}>
-                                          <p style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 10 }}>Lead Details</p>
+                                        <div style={{ background: '#F5F5F3', borderRadius: 8, padding: '1rem' }}>
+                                          <p style={{ fontSize: '0.6rem', color: 'rgba(10,10,10,.45)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 10, marginTop: 0 }}>Lead Details</p>
                                           {[
                                             ['Email', l.email],
                                             ['Business Type', l.businessType],
@@ -306,41 +317,38 @@ export default function AdminDashboard() {
                                             ['Submitted', new Date(l.createdAt).toLocaleString('en-IN')],
                                           ].map(([k, v]) => (
                                             <div key={k} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-                                              <span style={{ color: '#555', fontSize: '0.72rem' }}>{k}</span>
-                                              <span style={{ color: '#ccc', fontSize: '0.72rem', fontWeight: 500, textAlign: 'right', maxWidth: '60%' }}>{v}</span>
+                                              <span style={{ color: 'rgba(10,10,10,.45)', fontSize: '0.72rem' }}>{k}</span>
+                                              <span style={{ color: '#0A0A0A', fontSize: '0.72rem', fontWeight: 500, textAlign: 'right', maxWidth: '60%' }}>{v}</span>
                                             </div>
                                           ))}
                                         </div>
-                                        <div style={{ background: '#0a0a0a', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, padding: '1rem' }}>
-                                          <p style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 10 }}>Client Message</p>
-                                          <p style={{ color: '#888', fontSize: '0.75rem', lineHeight: 1.6 }}>{l.message || '—'}</p>
+                                        <div style={{ background: '#F5F5F3', borderRadius: 8, padding: '1rem' }}>
+                                          <p style={{ fontSize: '0.6rem', color: 'rgba(10,10,10,.45)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 10, marginTop: 0 }}>Client Message</p>
+                                          <p style={{ color: 'rgba(10,10,10,.62)', fontSize: '0.75rem', lineHeight: 1.6, margin: 0 }}>{l.message || '—'}</p>
                                         </div>
-                                        <div style={{ background: '#0a0a0a', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, padding: '1rem', display: 'flex', flexDirection: 'column', gap: 8 }}>
-                                          <p style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.12em' }}>Internal Notes</p>
+                                        <div style={{ background: '#F5F5F3', borderRadius: 8, padding: '1rem', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                                          <p style={{ fontSize: '0.6rem', color: 'rgba(10,10,10,.45)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.12em', margin: 0 }}>Internal Notes</p>
                                           <textarea
                                             value={notesMap[l.id] ?? l.notes ?? ''}
                                             onChange={e => setNotesMap(prev => ({ ...prev, [l.id]: e.target.value }))}
                                             rows={4}
                                             placeholder="Add notes about this lead…"
                                             aria-label="Internal notes"
-                                            style={{ background: '#111', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6, color: '#ccc', fontSize: '0.75rem', padding: '8px 10px', outline: 'none', resize: 'none', lineHeight: 1.5, flex: 1 }}
+                                            style={{ background: '#fff', border: '1px solid rgba(10,10,10,.15)', borderRadius: 8, color: '#0A0A0A', fontSize: '0.75rem', padding: '8px 10px', resize: 'none', lineHeight: 1.5, flex: 1, fontFamily: 'Inter, sans-serif' }}
                                           />
-                                          <button
-                                            onClick={() => saveNotes(l.id)}
-                                            style={{ padding: '6px 14px', background: '#F7C83C', color: '#0a0a0a', border: 'none', borderRadius: 6, fontSize: '0.7rem', fontWeight: 700, cursor: 'pointer', letterSpacing: '0.08em', textTransform: 'uppercase', alignSelf: 'flex-end' }}
-                                          >
+                                          <button onClick={() => saveNotes(l.id)} style={{ ...yellowPill, padding: '6px 14px', fontSize: '0.7rem', alignSelf: 'flex-end' }}>
                                             Save Notes
                                           </button>
                                         </div>
                                       </div>
                                       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', paddingTop: 12, gap: 6 }}>
                                         {deleteError && deleteTarget === l.id && (
-                                          <p style={{ color: '#f87171', fontSize: '0.72rem' }}>{deleteError}</p>
+                                          <p style={{ color: '#B91C1C', fontSize: '0.72rem', margin: 0 }}>{deleteError}</p>
                                         )}
                                         <button
                                           onClick={() => { setDeleteTarget(l.id); setDeleteError('') }}
                                           aria-label="Delete lead"
-                                          style={{ padding: '5px 14px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: 6, fontSize: '0.65rem', fontWeight: 600, color: '#f87171', cursor: 'pointer', letterSpacing: '0.08em', textTransform: 'uppercase' }}
+                                          style={{ padding: '5px 14px', background: 'rgba(239,68,68,.08)', border: 'none', borderRadius: 999, fontSize: '0.65rem', fontWeight: 600, color: '#B91C1C', cursor: 'pointer', letterSpacing: '0.08em', textTransform: 'uppercase' }}
                                         >
                                           🗑 Delete Lead
                                         </button>
@@ -361,11 +369,11 @@ export default function AdminDashboard() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', borderTop: '1px solid rgba(255,255,255,0.06)', fontSize: '0.75rem', color: '#555' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', borderTop: HAIR, fontSize: '0.75rem', color: 'rgba(10,10,10,.45)' }}>
                 <span>Page {page} of {totalPages}</span>
                 <div style={{ display: 'flex', gap: 8 }}>
-                  <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} aria-label="Previous page" style={{ padding: '5px 14px', background: '#0a0a0a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6, color: page === 1 ? '#333' : '#888', cursor: page === 1 ? 'not-allowed' : 'pointer' }}>← Prev</button>
-                  <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages} aria-label="Next page" style={{ padding: '5px 14px', background: '#0a0a0a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6, color: page === totalPages ? '#333' : '#888', cursor: page === totalPages ? 'not-allowed' : 'pointer' }}>Next →</button>
+                  <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} aria-label="Previous page" style={{ padding: '5px 16px', background: '#fff', border: '1px solid rgba(10,10,10,.15)', borderRadius: 999, color: page === 1 ? 'rgba(10,10,10,.25)' : '#0A0A0A', cursor: page === 1 ? 'not-allowed' : 'pointer', fontSize: '0.75rem' }}>← Prev</button>
+                  <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages} aria-label="Next page" style={{ padding: '5px 16px', background: '#fff', border: '1px solid rgba(10,10,10,.15)', borderRadius: 999, color: page === totalPages ? 'rgba(10,10,10,.25)' : '#0A0A0A', cursor: page === totalPages ? 'not-allowed' : 'pointer', fontSize: '0.75rem' }}>Next →</button>
                 </div>
               </div>
             )}
