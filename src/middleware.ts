@@ -17,9 +17,15 @@ export function middleware(req: NextRequest) {
     return new NextResponse(null, { status: 404 })
   }
 
+  // Friendly alias for allowlisted admins only — outsiders 404 above,
+  // so the alias reveals nothing about the real portal path.
+  if (req.nextUrl.pathname === '/admin') {
+    return NextResponse.redirect(new URL('/s1-portal', req.url))
+  }
+
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/s1-portal', '/s1-portal/:path*'],
+  matcher: ['/admin', '/s1-portal', '/s1-portal/:path*'],
 }
