@@ -39,4 +39,5 @@ Thumbs.db
 logs/
 
 
-learning.mdtsconfig.tsbuildinfo
+learning.md
+tsconfig.tsbuildinfo
