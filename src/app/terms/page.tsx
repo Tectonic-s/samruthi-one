@@ -64,41 +64,38 @@ const sections = [
 
 export default function TermsPage() {
   return (
-    <div className="py-12 lg:py-20 relative z-10">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="page-enter py-16 lg:py-24">
+      <div className="max-w-3xl mx-auto px-6 lg:px-8">
 
         {/* Header */}
-        <div className="bg-gray-950/50 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] border border-white/20 shadow-2xl mb-8">
-          <p className="text-xs font-semibold tracking-widest uppercase text-[#F7C83C] mb-3">Legal</p>
-          <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4">Terms &amp; Conditions</h1>
-          <p className="text-gray-400 text-sm leading-relaxed">
+        <div className="mb-14 border-b border-line pb-10">
+          <p className="text-[12px] font-semibold tracking-[0.12em] uppercase text-gold-hover mb-4">Legal</p>
+          <h1 className="text-4xl lg:text-5xl font-heading font-bold text-ink tracking-[-0.02em] mb-5">Terms &amp; Conditions</h1>
+          <p className="text-ink-faint text-sm leading-relaxed">
             Last updated: January 2025 &nbsp;·&nbsp; CIN: {SITE_CONFIG.company.cin}
           </p>
-          <p className="text-gray-300 text-sm leading-relaxed mt-4 max-w-2xl">
+          <p className="text-ink-soft text-[15px] leading-relaxed mt-4 max-w-2xl">
             Please read these Terms and Conditions carefully before using Samruthi One&apos;s services or website. By submitting an enquiry or engaging our services, you agree to be legally bound by these terms.
           </p>
         </div>
 
         {/* Sections */}
-        <div className="space-y-4">
+        <div className="space-y-10">
           {sections.map((section) => (
-            <div
-              key={section.title}
-              className="bg-gray-950/50 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/20 shadow-lg"
-            >
-              <h2 className="text-base font-bold text-white mb-3 tracking-tight">{section.title}</h2>
-              <p className="text-sm text-gray-300 leading-relaxed">{section.content}</p>
+            <div key={section.title}>
+              <h2 className="text-[17px] font-heading font-bold text-ink mb-3 tracking-tight">{section.title}</h2>
+              <p className="text-[15px] text-ink-soft leading-relaxed">{section.content}</p>
             </div>
           ))}
         </div>
 
         {/* Back link */}
-        <div className="mt-10 text-center">
-          <Link href="/privacy" className="text-[#F7C83C] text-sm font-semibold hover:underline">
+        <div className="mt-16 pt-8 border-t border-line text-center">
+          <Link href="/privacy" className="text-ink text-sm font-medium underline decoration-gold decoration-2 underline-offset-4 hover:decoration-gold-hover">
             &larr; Privacy Policy
           </Link>
-          <span className="text-gray-600 mx-4">·</span>
-          <Link href="/" className="text-[#F7C83C] text-sm font-semibold hover:underline">
+          <span className="text-ink-faint mx-4">·</span>
+          <Link href="/" className="text-ink text-sm font-medium underline decoration-gold decoration-2 underline-offset-4 hover:decoration-gold-hover">
             Back to Home &rarr;
           </Link>
         </div>

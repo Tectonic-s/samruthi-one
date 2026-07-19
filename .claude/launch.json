@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "samruthi-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "/Users/tectonic/Documents/Samruthi/samruthi-one",
+      "port": 3000
+    }
+  ]
+}

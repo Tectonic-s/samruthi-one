@@ -1,117 +1,88 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { SITE_CONFIG } from '@/lib/data/content'
+import { SERVICES } from '@/lib/data/services'
+
+const HAIR = '1px solid rgba(10,10,10,.08)'
 
 export default function Footer() {
   return (
-    <footer className="bg-black/80 border-t border-white/10 text-gray-400 py-16 mt-auto">
-      <div className="w-full mx-auto px-4 lg:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-12">
-          {/* Company Intro */}
-          <div className="md:col-span-4 flex flex-col space-y-4">
-            <Link href="/" className="select-none">
-              <Image src="/logos/Logo2.png" alt="Samruthi One" width={160} height={160} style={{ objectFit: 'contain', height: '45px', width: 'auto' }} />
-            </Link>
-            
-            <p className="text-sm text-gray-400 leading-relaxed max-w-xs">
-              RBI-registered Fintech providing working capital, trade finance, and property loans with multi-bank access for businesses across India.
+    <footer className="mt-auto" style={{ background: '#F5F5F3' }}>
+      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 pt-[72px] pb-10">
+        <div className="grid grid-cols-1 min-[901px]:grid-cols-[2fr_1fr_1fr_1fr] gap-12 mb-14">
+
+          {/* Brand */}
+          <div>
+            <Image
+              src="/assets/logos/Logo.png"
+              alt="Samruthi One"
+              width={160}
+              height={160}
+              style={{ height: 30, width: 'auto', filter: 'brightness(0)', marginBottom: 22 }}
+            />
+            <p className="text-[14px] leading-[1.7] max-w-[300px] mb-[18px]" style={{ color: 'rgba(10,10,10,.62)' }}>
+              RBI-registered financial advisory providing working capital, trade finance, and property loans with multi-bank access for businesses across India.
             </p>
-            
-            <p className="text-xs text-[#F7C83C] font-semibold tracking-wider">
+            <p className="text-[12px] font-medium tracking-[.03em]" style={{ color: '#E6B400' }}>
               CIN: {SITE_CONFIG.company.cin}
             </p>
           </div>
 
-          {/* Quick links columns */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:col-span-8 gap-8">
-            <div>
-              <h4 className="text-xs font-bold tracking-widest uppercase text-white mb-4">
-                Services
-              </h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link href="/services/loan-against-property" className="hover:text-[#F7C83C] transition-colors">
-                    Loan Against Property
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services/home-loan" className="hover:text-[#F7C83C] transition-colors">
-                    Home Loan
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services/personal-loan" className="hover:text-[#F7C83C] transition-colors">
-                    Personal Loan
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services/business-loans" className="hover:text-[#F7C83C] transition-colors">
-                    Business Loans
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services" className="text-[#F7C83C] hover:underline font-semibold text-xs uppercase tracking-wider block mt-2">
-                    View All Services &rarr;
-                  </Link>
-                </li>
-              </ul>
+          {/* Services */}
+          <div>
+            <h4 className="text-[12px] font-semibold tracking-[.1em] uppercase mb-5" style={{ color: '#E6B400' }}>
+              Services
+            </h4>
+            <div className="flex flex-col gap-3 text-[14px]">
+              {SERVICES.slice(0, 4).map((s) => (
+                <Link key={s.slug} href={`/services/${s.slug}`} className="hover:text-ink transition-colors" style={{ color: 'rgba(10,10,10,.62)' }}>
+                  {s.name}
+                </Link>
+              ))}
+              <Link href="/services" className="font-medium text-[13px] text-ink hover:text-gold-hover transition-colors">
+                View all services →
+              </Link>
             </div>
+          </div>
 
-            <div>
-              <h4 className="text-xs font-bold tracking-widest uppercase text-white mb-4">
-                Company
-              </h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link href="/about" className="hover:text-[#F7C83C] transition-colors">
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/partners" className="hover:text-[#F7C83C] transition-colors">
-                    Lender Network
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/enquiry" className="hover:text-[#F7C83C] transition-colors">
-                    Contact & Enquiry
-                  </Link>
-                </li>
-              </ul>
+          {/* Company */}
+          <div>
+            <h4 className="text-[12px] font-semibold tracking-[.1em] uppercase mb-5" style={{ color: '#E6B400' }}>
+              Company
+            </h4>
+            <div className="flex flex-col gap-3 text-[14px]">
+              <Link href="/about" className="hover:text-ink transition-colors" style={{ color: 'rgba(10,10,10,.62)' }}>About Us</Link>
+              <Link href="/partners" className="hover:text-ink transition-colors" style={{ color: 'rgba(10,10,10,.62)' }}>Lender Network</Link>
+              <Link href="/enquiry" className="hover:text-ink transition-colors" style={{ color: 'rgba(10,10,10,.62)' }}>Contact</Link>
             </div>
+          </div>
 
-            <div className="col-span-2 sm:col-span-1">
-              <h4 className="text-xs font-bold tracking-widest uppercase text-white mb-4">
-                Offices
-              </h4>
-              <ul className="space-y-3 text-xs leading-relaxed">
-                <li>
-                  <span className="font-semibold text-white block">
-                    {SITE_CONFIG.company.address.city1} (HQ)
-                  </span>
-                  {SITE_CONFIG.company.address.area1}, {SITE_CONFIG.company.address.pincode1}
-                </li>
-                <li>
-                  <span className="font-semibold text-white block">
-                    {SITE_CONFIG.company.address.city2}
-                  </span>
-                  {SITE_CONFIG.company.address.area2}, {SITE_CONFIG.company.address.pincode2}
-                </li>
-              </ul>
-            </div>
+          {/* Offices */}
+          <div>
+            <h4 className="text-[12px] font-semibold tracking-[.1em] uppercase mb-5" style={{ color: '#E6B400' }}>
+              Offices
+            </h4>
+            <p className="text-[13px] font-semibold mb-0.5">
+              {SITE_CONFIG.company.address.city1} <span className="font-normal" style={{ color: 'rgba(10,10,10,.42)' }}>(HQ)</span>
+            </p>
+            <p className="text-[13px] mb-4" style={{ color: 'rgba(10,10,10,.42)' }}>
+              {SITE_CONFIG.company.address.area1} · {SITE_CONFIG.company.address.pincode1}
+            </p>
+            <p className="text-[13px] font-semibold mb-0.5">{SITE_CONFIG.company.address.city2}</p>
+            <p className="text-[13px]" style={{ color: 'rgba(10,10,10,.42)' }}>
+              {SITE_CONFIG.company.address.area2} · {SITE_CONFIG.company.address.pincode2}
+            </p>
           </div>
         </div>
 
-        {/* Footer bottom bar */}
-        <div className="pt-8 border-t border-white/20 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
-          <p>&copy; {new Date().getFullYear()} SamruthiOne. All rights reserved.</p>
-          <div className="flex gap-4">
-          <Link href="/privacy" className="hover:text-[#F7C83C] transition-colors">Privacy Policy</Link>
-            <span>&middot;</span>
-            <Link href="/terms" className="hover:text-[#F7C83C] transition-colors">Terms of Service</Link>
-            <span>&middot;</span>
-            <span className="text-gray-600">Registered Fintech Advisory Firm</span>
-          </div>
+        {/* Bottom bar */}
+        <div className="pt-7 flex flex-col sm:flex-row justify-between items-center gap-3 text-[13px]" style={{ borderTop: HAIR, color: 'rgba(10,10,10,.42)' }}>
+          <span>© {new Date().getFullYear()} SamruthiOne. All rights reserved.</span>
+          <span>
+            <Link href="/privacy" className="hover:text-ink transition-colors" style={{ color: 'inherit' }}>Privacy Policy</Link>
+            {' · '}
+            <Link href="/terms" className="hover:text-ink transition-colors" style={{ color: 'inherit' }}>Terms of Service</Link>
+          </span>
         </div>
       </div>
     </footer>

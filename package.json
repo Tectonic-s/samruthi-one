@@ -11,27 +11,28 @@
     "vercel-build": "prisma generate && next build"
   },
   "dependencies": {
+    "@prisma/client": "^5",
+    "bcryptjs": "^2",
+    "exceljs": "^4",
+    "gsap": "^3.15.0",
+    "nanoid": "^5",
     "next": "14.2.5",
+    "next-auth": "^4",
     "react": "^18",
     "react-dom": "^18",
-    "@prisma/client": "^5",
-    "next-auth": "^4",
-    "resend": "^3",
-    "exceljs": "^4",
-    "bcryptjs": "^2",
-    "nanoid": "^5"
+    "resend": "^3"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "prisma": "^5",
+    "@types/bcryptjs": "^2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@types/bcryptjs": "^2",
-    "tailwindcss": "^3",
     "autoprefixer": "^10",
-    "postcss": "^8",
     "eslint": "^8",
-    "eslint-config-next": "14.2.5"
+    "eslint-config-next": "14.2.5",
+    "postcss": "^8",
+    "prisma": "^5",
+    "tailwindcss": "^3",
+    "typescript": "^5"
   }
 }
