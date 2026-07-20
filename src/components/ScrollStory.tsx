@@ -19,22 +19,25 @@ const HEADLINES = [
   { badge: 'Step 4 of 4', title: 'You get funded. Fast.', sub: 'Best offer in your account in days, not months — we do the waiting for you.' },
 ]
 
-/* Classical bank building illustration (pediment, columns, steps) */
+/* Minimal line-style institution icon: pediment + flat lintel +
+   four thin columns + base, one light tone, small gold emblem. */
+const LINE = 'rgba(244,243,239,.75)'
 function BankBuilding({ x, y, label }: { x: number; y: number; label: string }) {
   return (
-    <g transform={`translate(${x} ${y})`}>
-      <ellipse cx={0} cy={48} rx={70} ry={8} fill="rgba(30,36,48,.10)" />
-      <rect x={-64} y={40} width={128} height={8} fill="url(#ill-stone)" stroke="#1E2430" strokeWidth={2.5} />
-      <rect x={-55} y={-38} width={110} height={78} fill="#D9D4C7" stroke="#1E2430" strokeWidth={2.5} />
-      <path d="M-62 -38 L0 -72 L62 -38 Z" fill="url(#ill-stone)" stroke="#1E2430" strokeWidth={2.5} />
-      <circle cy={-52} r={6} fill="url(#ill-coin)" stroke="#1E2430" strokeWidth={2} />
-      {[-42, -6, 30].map((cx) => (
-        <g key={cx}>
-          <rect x={cx} y={-30} width={12} height={70} fill="url(#ill-col)" stroke="#1E2430" strokeWidth={2} />
-          <rect x={cx - 3} y={-34} width={18} height={6} fill="url(#ill-stone)" stroke="#1E2430" strokeWidth={2} />
-        </g>
+    <g transform={`translate(${x} ${y})`} stroke={LINE} strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round">
+      {/* pediment */}
+      <path d="M-48 -34 L0 -62 L48 -34" />
+      {/* flat lintel */}
+      <line x1={-54} y1={-28} x2={54} y2={-28} />
+      {/* four thin columns */}
+      {[-39, -13, 13, 39].map((cx) => (
+        <line key={cx} x1={cx} y1={-22} x2={cx} y2={32} />
       ))}
-      <text y={68} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={20} fill="#0A0A0A">{label}</text>
+      {/* base */}
+      <line x1={-54} y1={38} x2={54} y2={38} />
+      {/* gold emblem */}
+      <circle cy={-47} r={5} fill="#F7C83C" stroke="none" />
+      <text y={68} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={20} fill="#F4F3EF" stroke="none">{label}</text>
     </g>
   )
 }
@@ -169,7 +172,8 @@ export default function ScrollStory() {
     op('sv4', 0.775, 0.795, 0, 1)
     tw('sv4', 0.775, 0.80, (el, k) => { el.setAttribute('transform', `translate(0 ${24 * (1 - k)})`) })
     op('v4-zoom', 0.775, 0.78, 1, 1)
-    tw('v4-zoom', 0.84, 0.92, (el, k) => { const s = 1 + 2.2 * k; el.setAttribute('transform', `translate(${600 * (1 - s)} ${385 * (1 - s)}) scale(${s})`) })
+    // deep zoom into the handshake (~5.5×) about the panel center
+    tw('v4-zoom', 0.84, 0.92, (el, k) => { const s = 1 + 4.5 * k; el.setAttribute('transform', `translate(${600 * (1 - s)} ${385 * (1 - s)}) scale(${s})`) })
     op('v4-zoom', 0.90, 0.95, 1, 0)
     op('v4-coin', 0.90, 0.95, 0, 1)
     cue('c-coin', 0.93, 1568)
@@ -182,7 +186,18 @@ export default function ScrollStory() {
       ;(el as HTMLElement).style.opacity = String(kin * (1 - kout))
       ;(el as HTMLElement).style.transform = `translateY(${14 * (1 - kin) - 12 * kout}px)`
     }, 'lin'))
-    op('story-cue', 0.93, 0.97, 1, 0)
+    // Cue fades AND collapses its space early (2–6%) so the panel
+    // re-centers once the visitor has started scrolling.
+    const cueEl = document.getElementById('story-cue')
+    const cueH = cueEl ? cueEl.offsetHeight : 0
+    tw('story-cue', 0.02, 0.06, (el, k) => {
+      const e = el as HTMLElement
+      e.style.opacity = String(1 - k)
+      e.style.height = `${cueH * (1 - k)}px`
+      e.style.paddingTop = `${14 * (1 - k)}px`
+      e.style.paddingBottom = `${24 * (1 - k)}px`
+      e.style.overflow = 'hidden'
+    })
 
     const rail = document.getElementById('story-rail')
     const dots = rail ? (Array.from(rail.children) as HTMLElement[]) : []
@@ -230,9 +245,11 @@ export default function ScrollStory() {
 
   return (
     <div id="story-run" style={{ height: '480vh', position: 'relative', background: '#fff' }}>
-      <div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden' }}>
+      {/* paddingTop clears the sticky 76px nav; paddingBottom keeps the
+          panel off the viewport edge */}
+      <div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden', padding: '86px 20px 18px', boxSizing: 'border-box' }}>
         {/* Headline stack */}
-        <div className="r-hlwrap" style={{ position: 'relative', width: '100%', marginTop: 44, textAlign: 'center', padding: '0 24px', height: 180, flex: 'none' }}>
+        <div className="r-hlwrap" style={{ position: 'relative', width: '100%', marginTop: 8, textAlign: 'center', padding: '0 24px', height: 180, flex: 'none' }}>
           {HEADLINES.map((h, i) => (
             <div key={h.badge} id={`hl${i}`} style={{ position: 'absolute', left: 0, right: 0, opacity: 0 }}>
               <span style={{ display: 'inline-block', fontSize: 12, fontWeight: 700, letterSpacing: '.16em', textTransform: 'uppercase', background: '#F7C83C', color: '#0A0A0A', padding: '7px 14px', borderRadius: 999 }}>{h.badge}</span>
@@ -242,8 +259,23 @@ export default function ScrollStory() {
           ))}
         </div>
 
-        {/* SVG canvas */}
-        <svg viewBox="230 80 820 545" className="r-storysvg" style={{ position: 'relative', flex: '1 1 0%', minHeight: 0, width: '100%', maxWidth: 900, marginTop: 10 }} role="img" aria-label="How Samruthi One gets your business funded">
+        {/* Illustration panel — rounded deep-ink card holding the SVG canvas */}
+        <div
+          className="r-storysvg"
+          style={{
+            position: 'relative',
+            flex: '1 1 0%',
+            minHeight: 0,
+            width: '100%',
+            maxWidth: 900,
+            marginTop: 10,
+            borderRadius: 28,
+            background: 'linear-gradient(160deg,#262A33,#191C22 60%,#14161B)',
+            overflow: 'hidden',
+            display: 'flex',
+          }}
+        >
+        <svg viewBox="230 80 820 545" style={{ width: '100%', height: '100%' }} role="img" aria-label="How Samruthi One gets your business funded">
           <defs>
             <radialGradient id="ill-coin" cx=".35" cy=".3" r=".95"><stop offset="0" stopColor="#FFE694" /><stop offset=".55" stopColor="#F7C83C" /><stop offset="1" stopColor="#D99E10" /></radialGradient>
             <linearGradient id="ill-wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#FFFEFA" /><stop offset="1" stopColor="#EAE6DC" /></linearGradient>
@@ -257,13 +289,13 @@ export default function ScrollStory() {
           {/* Scene 0 — Who we are */}
           <g id="sv0" opacity={0}>
             <image href="/assets/char-advisor-sm.png" x={598.5} y={240} width={82.9} height={240} />
-            <text x={640} y={522} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#0A0A0A">Samruthi One</text>
+            <text x={640} y={522} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#F4F3EF">Samruthi One</text>
           </g>
 
           {/* Scene 1 — You need funds */}
           <g id="sv1" opacity={0}>
             <image href="/assets/char-you-sm.png" x={390.3} y={230} width={79.5} height={240} />
-            <text x={430} y={512} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#0A0A0A">You</text>
+            <text x={430} y={512} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#F4F3EF">You</text>
             <g>
               <circle cx={333} cy={259} r={36} fill="rgba(30,36,48,.12)" />
               <circle cx={330} cy={255} r={36} fill="url(#ill-coin)" stroke="#1E2430" strokeWidth={3} />
@@ -274,7 +306,7 @@ export default function ScrollStory() {
               <circle cx={396} cy={326} r={5} fill="url(#ill-coin)" stroke="#1E2430" strokeWidth={2.5} />
             </g>
             <Shopfront />
-            <text x={680} y={512} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#0A0A0A">Your business</text>
+            <text x={680} y={512} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#F4F3EF">Your business</text>
             <path id="v1-arrow" d="M470 260 C 620 240 760 190 900 120" fill="none" stroke="#E6B400" strokeWidth={6} strokeLinecap="round" pathLength={1} style={DASH0} />
             <path id="v1-ah" d="M900 120 L866 128 M900 120 L884 152" stroke="#E6B400" strokeWidth={6} strokeLinecap="round" fill="none" opacity={0} />
           </g>
@@ -282,9 +314,9 @@ export default function ScrollStory() {
           {/* Scene 2 — One application */}
           <g id="sv2" opacity={0}>
             <image href="/assets/char-you-sm.png" x={400.3} y={230} width={79.5} height={240} />
-            <text x={440} y={512} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#0A0A0A">You</text>
+            <text x={440} y={512} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#F4F3EF">You</text>
             <image href="/assets/char-advisor-sm.png" x={718.5} y={230} width={82.9} height={240} />
-            <text x={760} y={512} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#0A0A0A">Samruthi One</text>
+            <text x={760} y={512} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#F4F3EF">Samruthi One</text>
             <g id="v2-doc" opacity={0}>
               <rect x={557} y={272} width={96} height={122} rx={8} fill="rgba(30,36,48,.14)" />
               <rect x={552} y={266} width={96} height={122} rx={8} fill="url(#ill-paper)" stroke="#1E2430" strokeWidth={3} />
@@ -297,22 +329,22 @@ export default function ScrollStory() {
               <rect x={540} y={176} width={120} height={38} rx={19} fill="#F7C83C" stroke="#1E2430" strokeWidth={2.5} />
               <text x={600} y={201} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={800} fontSize={19} fill="#0A0A0A">10 mins</text>
             </g>
-            <path id="v2-arr" d="M486 428 L714 428" stroke="rgba(10,10,10,.35)" strokeWidth={4} strokeLinecap="round" pathLength={1} style={DASH0} fill="none" />
-            <path id="v2-ah" d="M728 428 L702 415 M728 428 L702 441" stroke="rgba(10,10,10,.35)" strokeWidth={4} strokeLinecap="round" fill="none" opacity={0} />
+            <path id="v2-arr" d="M486 428 L714 428" stroke="rgba(255,255,255,.5)" strokeWidth={4} strokeLinecap="round" pathLength={1} style={DASH0} fill="none" />
+            <path id="v2-ah" d="M728 428 L702 415 M728 428 L702 441" stroke="rgba(255,255,255,.5)" strokeWidth={4} strokeLinecap="round" fill="none" opacity={0} />
           </g>
 
           {/* Scene 3 — 23+ lenders */}
           <g id="sv3" opacity={0}>
             <image href="/assets/char-advisor-sm.png" x={288.6} y={230} width={82.9} height={240} />
-            <text x={330} y={512} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#0A0A0A">Samruthi One</text>
-            <path id="v3-l1" d="M436 352 L700 165" stroke="rgba(10,10,10,.45)" strokeWidth={3} pathLength={1} style={DASH0} fill="none" />
-            <path id="v3-l2" d="M440 368 L830 360" stroke="rgba(10,10,10,.45)" strokeWidth={3} pathLength={1} style={DASH0} fill="none" />
-            <path id="v3-l3" d="M436 385 L700 545" stroke="rgba(10,10,10,.45)" strokeWidth={3} pathLength={1} style={DASH0} fill="none" />
+            <text x={330} y={512} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#F4F3EF">Samruthi One</text>
+            <path id="v3-l1" d="M436 352 L700 165" stroke="rgba(255,255,255,.55)" strokeWidth={3} pathLength={1} style={DASH0} fill="none" />
+            <path id="v3-l2" d="M440 368 L830 360" stroke="rgba(255,255,255,.55)" strokeWidth={3} pathLength={1} style={DASH0} fill="none" />
+            <path id="v3-l3" d="M436 385 L700 545" stroke="rgba(255,255,255,.55)" strokeWidth={3} pathLength={1} style={DASH0} fill="none" />
             <BankBuilding x={770} y={175} label="Bank" />
             <BankBuilding x={900} y={360} label="Bank" />
             <BankBuilding x={770} y={545} label="NBFC" />
             <g id="v3-seal" opacity={0}>
-              <text x={962} y={276} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={18} fill="#0A0A0A">Best offer</text>
+              <text x={962} y={276} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={18} fill="#F4F3EF">Best offer</text>
               <circle cx={964} cy={314} r={22} fill="rgba(30,36,48,.14)" />
               <circle cx={962} cy={312} r={22} fill="url(#ill-coin)" stroke="#1E2430" strokeWidth={3} />
               <path id="v3-check" d="M951 312 L959 321 L974 303" stroke="#0A0A0A" strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" fill="none" pathLength={1} style={DASH0} />
@@ -323,8 +355,8 @@ export default function ScrollStory() {
           <g id="sv4" opacity={0}>
             <g id="v4-zoom">
               <image href="/assets/char-handshake-pair-sm.png" x={511} y={260} width={178} height={240} />
-              <text x={546} y={542} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#0A0A0A">You</text>
-              <text x={656} y={542} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#0A0A0A">Us</text>
+              <text x={546} y={542} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#F4F3EF">You</text>
+              <text x={656} y={542} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={700} fontSize={22} fill="#F4F3EF">Us</text>
             </g>
             <g id="v4-coin" opacity={0}>
               <circle cx={605} cy={336} r={90} fill="rgba(30,36,48,.12)" />
@@ -334,12 +366,13 @@ export default function ScrollStory() {
               <path d="M552 284 A 66 66 0 0 1 608 264" stroke="rgba(255,255,255,.85)" strokeWidth={8} strokeLinecap="round" fill="none" />
             </g>
             <g id="v4-fast" opacity={0}>
-              <rect x={510} y={470} width={180} height={38} rx={19} fill="#0A0A0A" />
-              <text x={600} y={495} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={800} fontSize={18} fill="#F7C83C">Days, not months</text>
+              <rect x={510} y={470} width={180} height={38} rx={19} fill="#F7C83C" stroke="#1E2430" strokeWidth={2.5} />
+              <text x={600} y={495} textAnchor="middle" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight={800} fontSize={18} fill="#0A0A0A">Days, not months</text>
             </g>
             <path id="v4-rays" d="M600 218 L600 186 M667 263 L690 240 M533 263 L510 240 M702 330 L734 330 M498 330 L466 330" stroke="#E6B400" strokeWidth={5} strokeLinecap="round" fill="none" pathLength={1} style={DASH0} />
           </g>
         </svg>
+        </div>
 
         {/* Scroll cue */}
         <div id="story-cue" style={{ position: 'relative', flex: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, pointerEvents: 'none', padding: '14px 0 24px' }}>

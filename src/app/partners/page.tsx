@@ -31,7 +31,7 @@ function LogoGrid({ logos }: { logos: [string, string][] }) {
           style={{ background: '#FAFAF9', border: '1px solid rgba(10,10,10,.06)' }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={`/assets/logos/${file}`} alt={name} style={{ maxHeight: 54, maxWidth: '72%', objectFit: 'contain', filter: 'grayscale(1)', opacity: 0.8 }} />
+          <img src={`/assets/logos/${file}`} alt={name} style={{ maxHeight: 54, maxWidth: '72%', objectFit: 'contain' }} />
         </div>
       ))}
     </div>

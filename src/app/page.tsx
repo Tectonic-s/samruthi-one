@@ -79,7 +79,7 @@ export default function HomePage() {
               src={`/assets/logos/${file}`}
               alt={i < BANK_LOGOS.length ? name : ''}
               aria-hidden={i >= BANK_LOGOS.length || undefined}
-              style={{ height: 48, objectFit: 'contain', filter: 'grayscale(1)', opacity: 0.65 }}
+              style={{ height: 48, objectFit: 'contain' }}
             />
           ))}
         </div>
